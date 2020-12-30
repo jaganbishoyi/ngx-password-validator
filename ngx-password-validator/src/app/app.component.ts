@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
 export class AppComponent {
     title = "ngx password validator";
     myOptions = {
-        "placement": "bottom",
+        placement: "top",
     };
     isValid(event: boolean) {
     }

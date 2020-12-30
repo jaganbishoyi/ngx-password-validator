@@ -1,6 +1,6 @@
 {
     "name": "ng-password-validator",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "The password validator is a pop-up window that appears when you start typing in input box. Here you can configure the password acceptance criteria, once your enter characters fullfil the requirement you will get a success message.",
     "author": "Jagan Mohan Bishoyi",
     "license": "MIT",
@@ -10,6 +10,7 @@
     },
     "keywords": [
         "Angular 2",
+        "Angular 9",
         "Angular password validator",
         "Password validator",
         "Angular 2+ password validator"
