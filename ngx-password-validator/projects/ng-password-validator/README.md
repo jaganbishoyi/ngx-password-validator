@@ -4,6 +4,9 @@ The password validator is a pop-up window that appears when you start typing in 
 
 Help to make Password Validator better by [answering a few questions](https://forms.gle/P5KKhEsr91N85oWE9).
 
+## Demo
+[https://jaganbishoyi.github.io/ngx-password-validator/](https://jaganbishoyi.github.io/ngx-password-validator/)
+
 ## Installation
 
 Install the npm package.

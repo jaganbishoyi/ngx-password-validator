@@ -8,7 +8,7 @@ import { AppComponent } from "./app.component";
 
 
 export const MyDefaultOptions: NgPasswordValidatorOptions = {
-    placement: "bottom",
+    placement: "top",
     rules: {
         "password-length": 10
     }
