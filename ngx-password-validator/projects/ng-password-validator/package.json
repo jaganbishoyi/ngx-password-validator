@@ -14,7 +14,7 @@
         "Password validator",
         "Angular 2+ password validator"
     ],
-    "homepage": "https://github.com/monatheoctocat/my_package",
+    "homepage": "https://github.com/jaganbishoyi/ngx-password-validator/tree/feature/ngx-password-validator/projects/ng-password-validator",
     "peerDependencies": {
         "@angular/common": "^9.0.7",
         "@angular/core": "^9.0.7",
