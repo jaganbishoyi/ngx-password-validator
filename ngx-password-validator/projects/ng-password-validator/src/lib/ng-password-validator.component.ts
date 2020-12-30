@@ -48,7 +48,7 @@ export class NgPasswordValidatorComponent implements OnInit {
      *
      * @memberof NgPasswordValidatorComponent
      */
-    @HostListener("transitionend", ["$event"])
+    @HostListener("transitionend", [""])
     transitionEnd(): void {
         if (this.show) {
             this.events.emit({

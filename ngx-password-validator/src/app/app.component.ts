@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
-
+import { Component } from "@angular/core";
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = 'ngx-password-validator';
+    title = "ngx password validator";
+    myOptions = {
+        "placement": "bottom",
+    };
+    isValid(event: boolean) {
+    }
 }
