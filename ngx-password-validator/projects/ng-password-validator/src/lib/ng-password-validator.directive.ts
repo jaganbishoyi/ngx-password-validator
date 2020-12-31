@@ -41,8 +41,10 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
 
     @Input("options") set options(value: NgPasswordValidatorOptions) {
         if (value && defaultOptions) {
-            this.passwordOptions = value;
-            this.regExpForLength = new RegExp("^(.){" + this.passwordOptions.rules["password-length"] + "}$");
+            this.passwordOptions = { ...value, ...defaultOptions };
+            if (this.passwordOptions && this.passwordOptions.rules["password-length"]) {
+                this.regExpForLength = new RegExp("^(.){" + this.passwordOptions.rules["password-length"] + "}$");
+            }
         }
     }
     @Input("NgPasswordValidator") popup: string;

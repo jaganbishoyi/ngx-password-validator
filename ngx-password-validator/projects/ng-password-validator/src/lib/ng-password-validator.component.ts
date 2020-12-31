@@ -12,10 +12,8 @@ import {
 import { DataService } from "./data.service";
 import { IElementPosition, IRules, IStatus, NgPasswordValidatorOptions } from "./ng-password-validator.interface";
 @Component({
-    // tslint:disable-next-line: component-selector
     selector: "NgPasswordValidator",
     templateUrl: "./ng-password-validator.component.html",
-    // tslint:disable-next-line: no-host-metadata-property
     host: { class: "popup" },
     styleUrls: ["./ng-password-validator.component.scss"]
 })
