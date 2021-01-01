@@ -38,9 +38,27 @@ You may pass as an object:
 <input type="text" id="password" name="password" placeholder="Password.."
     NgPasswordValidator [options]="myOptions">
 ```
+Password type as 'range':
 ```ts
 myOptions = {
     'placement': 'top',
+    'password': {
+        'type': "range";
+        'min': 6;
+        'max': 10;
+    },
+    'shadow': false,
+    'offset': 15,
+}
+```
+Password type as 'number':
+```ts
+myOptions = {
+    'placement': 'top',
+    'password': {
+        'type': "number";
+        'length': 8;
+    },
     'shadow': false,
     'offset': 15,
 }
