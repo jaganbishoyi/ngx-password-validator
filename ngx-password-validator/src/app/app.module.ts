@@ -11,7 +11,7 @@ import { AppComponent } from "./app.component";
 export const MyDefaultOptions: NgPasswordValidatorOptions = {
     placement: "top",
     rules: {
-        "password-length": 10
+        "include-lowercase-characters": false,
     }
 };
 @NgModule({

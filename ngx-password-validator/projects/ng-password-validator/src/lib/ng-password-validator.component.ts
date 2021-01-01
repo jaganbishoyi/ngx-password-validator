@@ -11,6 +11,7 @@ import {
 
 import { DataService } from "./data.service";
 import { IElementPosition, IRules, IStatus, NgPasswordValidatorOptions } from "./ng-password-validator.interface";
+import { defaultOptions } from "./options";
 @Component({
     selector: "NgPasswordValidator",
     templateUrl: "./ng-password-validator.component.html",
@@ -19,15 +20,16 @@ import { IElementPosition, IRules, IStatus, NgPasswordValidatorOptions } from ".
 })
 export class NgPasswordValidatorComponent implements OnInit {
     passwordStatus = {
-        passwordLength: false,
-        includeSymbol: false,
-        includeNumber: false,
-        includeLowercaseCharacters: false,
-        includeUppercaseCharacters: false,
+        "password": false,
+        "include-symbol": false,
+        "include-number": false,
+        "include-lowercase-characters": false,
+        "include-uppercase-characters": false,
     };
     isSecure = false;
     Show = false;
     events = new EventEmitter();
+    passwordOptions: NgPasswordValidatorOptions = defaultOptions;
 
     @Input() data: any;
 
@@ -70,7 +72,6 @@ export class NgPasswordValidatorComponent implements OnInit {
         return this.data.options.placement;
     }
 
-    // tslint:disable-next-line: typedef
     get element() {
         return this.data.element;
     }
@@ -107,6 +108,11 @@ export class NgPasswordValidatorComponent implements OnInit {
         this.setStyles();
         this.dataService.updatedValue.subscribe((data: IStatus) => {
             this.passwordStatus = { ... this.passwordStatus, ...data };
+            for (const propName in this.passwordOptions.rules) {
+                if (!this.passwordOptions.rules[propName]) {
+                    delete this.passwordStatus[propName];
+                }
+            }
             this.isSecure = Object.values(this.passwordStatus).every((value: boolean) => value);
         });
     }

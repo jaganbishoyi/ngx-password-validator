@@ -24,7 +24,7 @@ export interface IElementPosition {
 }
 
 export interface IRules {
-    "password-length"?: number | boolean;
+    "password"?: false | IPassword;
     "include-symbol"?: boolean;
     "include-number"?: boolean;
     "include-lowercase-characters"?: boolean;
@@ -32,9 +32,15 @@ export interface IRules {
 }
 
 export interface IStatus {
-    passwordLength: boolean;
-    includeSymbol: boolean;
-    includeNumber: boolean;
-    includeLowercaseCharacters: boolean;
-    includeUppercaseCharacters: boolean;
+    "password": boolean;
+    "include-symbol": boolean;
+    "include-number": boolean;
+    "include-lowercase-characters": boolean;
+    "include-uppercase-characters": boolean;
+}
+export interface IPassword {
+    type?: "number" | "range";
+    length?: number;
+    min?: number;
+    max?: number;
 }

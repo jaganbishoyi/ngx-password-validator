@@ -67,7 +67,6 @@ import { NgPasswordValidatorModule, NgPasswordValidatorOptions } from "ng-passwo
 export const MyDefaultOptions: NgPasswordValidatorOptions = {
     placement: "right",
     rules: {
-        "password-length": 10,
         "include-symbol": true,
         "include-number": true,
         "include-lowercase-characters": true,
