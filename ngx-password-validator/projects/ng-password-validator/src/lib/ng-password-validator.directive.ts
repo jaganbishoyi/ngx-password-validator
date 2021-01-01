@@ -40,7 +40,21 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
 
     @Input("options") set options(value: NgPasswordValidatorOptions) {
         if (value && defaultOptions) {
-            this.passwordOptions = { ...defaultOptions, ...value };
+
+            // Merge a `source` object to a `target` recursively
+            const merge = (target: NgPasswordValidatorOptions, source: NgPasswordValidatorOptions): NgPasswordValidatorOptions => {
+                // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
+                for (const key of Object.keys(source)) {
+                    if (source[key] instanceof Object) { Object.assign(source[key], merge(target[key], source[key])); }
+                }
+
+                // Join `target` and modified `source`
+                Object.assign(target || {}, source);
+
+                return target;
+            };
+
+            this.passwordOptions = merge(defaultOptions, value);
             if (this.passwordOptions.rules.password) {
                 switch (this.passwordOptions.rules["password"].type) {
                     case "number":
