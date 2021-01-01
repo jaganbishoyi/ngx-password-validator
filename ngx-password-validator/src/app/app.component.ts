@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { NgPasswordValidatorOptions } from "ng-password-validator";
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html",
@@ -6,9 +7,20 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
     title = "ngx password validator";
-    myOptions = {
+    myOptions: NgPasswordValidatorOptions = {
         placement: "bottom",
+        rules: {
+            "include-lowercase-characters": true,
+        }
     };
-    isValid(event: boolean) {
+
+    /**
+     * Password requirement is fulfilled or not
+     *
+     * @param {boolean} event
+     * @memberof AppComponent
+     */
+    isValid(event: boolean): void {
+        console.log(event);
     }
 }

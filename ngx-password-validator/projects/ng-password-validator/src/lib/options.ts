@@ -8,7 +8,12 @@ export const defaultOptions: NgPasswordValidatorOptions = {
     theme: "basic",
     offset: 8,
     rules: {
-        "password-length": 8,
+        password: {
+            type: "range",
+            length: 8,
+            min: 6,
+            max: 10,
+        },
         "include-symbol": true,
         "include-number": true,
         "include-lowercase-characters": true,
@@ -17,9 +22,9 @@ export const defaultOptions: NgPasswordValidatorOptions = {
 };
 
 export const initializeStage: IStatus = {
-    passwordLength: false,
-    includeSymbol: false,
-    includeNumber: false,
-    includeLowercaseCharacters: false,
-    includeUppercaseCharacters: false,
+    password: false,
+    "include-symbol": false,
+    "include-number": false,
+    "include-lowercase-characters": false,
+    "include-uppercase-characters": false,
 };

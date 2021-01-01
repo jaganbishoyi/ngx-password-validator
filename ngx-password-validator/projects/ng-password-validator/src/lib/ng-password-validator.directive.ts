@@ -21,13 +21,12 @@ export interface HostComponent {
 }
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
     selector: "[NgPasswordValidator]",
     exportAs: "NgPasswordValidator",
 })
 
 export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
-    regExpForLength = /^(.){6}$/;
+    regExpForLength = /^(.){8}$/;
     regExpForOneUpper = /^(?=.*[A-Z])(.*)$/;
     regExpForOneLower = /^(?=.*[a-z])(.*)$/;
     regExpForOneDigit = /^(?=.*[0-9])(.*)$/;
@@ -41,8 +40,33 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
 
     @Input("options") set options(value: NgPasswordValidatorOptions) {
         if (value && defaultOptions) {
-            this.passwordOptions = value;
-            this.regExpForLength = new RegExp("^(.){" + this.passwordOptions.rules["password-length"] + "}$");
+
+            // Merge a `source` object to a `target` recursively
+            const merge = (target: NgPasswordValidatorOptions, source: NgPasswordValidatorOptions): NgPasswordValidatorOptions => {
+                // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
+                for (const key of Object.keys(source)) {
+                    if (source[key] instanceof Object) { Object.assign(source[key], merge(target[key], source[key])); }
+                }
+
+                // Join `target` and modified `source`
+                Object.assign(target || {}, source);
+
+                return target;
+            };
+
+            this.passwordOptions = merge(defaultOptions, value);
+            if (this.passwordOptions.rules.password) {
+                switch (this.passwordOptions.rules["password"].type) {
+                    case "number":
+                        this.regExpForLength = new RegExp(`^(.){${this.passwordOptions.rules["password"].length}}$`);
+                        break;
+
+                    case "range":
+                        this.regExpForLength =
+                            new RegExp(`^(.){${this.passwordOptions.rules["password"].min},${this.passwordOptions.rules["password"].max}}$`);
+                }
+            }
+
         }
     }
     @Input("NgPasswordValidator") popup: string;
@@ -155,13 +179,18 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      */
     checkPassword(inputValue: string): void {
         const data = {
-            passwordLength: inputValue.match(this.regExpForLength) ? true : false,
-            includeSymbol: inputValue.match(this.regExpForSpecialCharacters) ? true : false,
-            includeNumber: inputValue.match(this.regExpForOneDigit) ? true : false,
-            includeLowercaseCharacters: inputValue.match(this.regExpForOneLower) ? true : false,
-            includeUppercaseCharacters: inputValue.match(this.regExpForOneUpper) ? true : false,
+            password: inputValue.match(this.regExpForLength) ? true : false,
+            "include-symbol": inputValue.match(this.regExpForSpecialCharacters) ? true : false,
+            "include-number": inputValue.match(this.regExpForOneDigit) ? true : false,
+            "include-lowercase-characters": inputValue.match(this.regExpForOneLower) ? true : false,
+            "include-uppercase-characters": inputValue.match(this.regExpForOneUpper) ? true : false,
         };
 
+        for (const propName in this.passwordOptions.rules) {
+            if (!this.passwordOptions.rules[propName]) {
+                delete data[propName];
+            }
+        }
         this.isValid = Object.values(data).every((value: boolean) => value);
         this.dataService.updateValue(data);
     }
