@@ -9,10 +9,7 @@ import { AppComponent } from "./app.component";
 
 
 export const MyDefaultOptions: NgPasswordValidatorOptions = {
-    placement: "top",
-    rules: {
-        "include-lowercase-characters": false,
-    }
+    placement: "bottom",
 };
 @NgModule({
     declarations: [
