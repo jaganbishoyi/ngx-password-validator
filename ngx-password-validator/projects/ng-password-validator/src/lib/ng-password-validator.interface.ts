@@ -4,7 +4,7 @@ export interface NgPasswordValidatorOptions {
     "animation-duration"?: number;
     "custom-class"?: string;
     "shadow"?: boolean;
-    "theme"?: string;
+    "theme"?: "basic" | "pro";
     "offset"?: number;
     "width"?: number;
     "max-width"?: number;

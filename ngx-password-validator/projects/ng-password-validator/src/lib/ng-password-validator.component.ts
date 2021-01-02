@@ -106,6 +106,7 @@ export class NgPasswordValidatorComponent implements OnInit {
     ngOnInit(): void {
         this.setCustomClass();
         this.setStyles();
+        this.theme();
         this.dataService.updatedValue.subscribe((data: IStatus) => {
             this.passwordStatus = { ... this.passwordStatus, ...data };
             for (const propName in this.passwordOptions.rules) {
@@ -239,6 +240,18 @@ export class NgPasswordValidatorComponent implements OnInit {
             });
         }
     }
+
+    /**
+     * Set theme
+     *
+     * @memberof NgPasswordValidatorComponent
+     */
+    theme(): void {
+        if (this.options["theme"]) {
+            this.renderer.addClass(this.elementRef.nativeElement, "popup-" + this.options["theme"]);
+        }
+    }
+
 
     /**
      * Sets the animation duration
