@@ -3,9 +3,9 @@ import { IStatus, NgPasswordValidatorOptions } from "./ng-password-validator.int
 export const defaultOptions: NgPasswordValidatorOptions = {
     placement: "bottom",
     "z-index": 0,
-    "custom-class": "",
+    "custom-class": "custom-class",
     shadow: true,
-    theme: "basic",
+    theme: "pro",
     offset: 8,
     rules: {
         password: {

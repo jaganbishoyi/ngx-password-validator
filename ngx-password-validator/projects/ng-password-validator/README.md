@@ -64,6 +64,27 @@ myOptions = {
 }
 ```
 
+Theming( Default value is pro ):
+
+```html
+<input type="text" id="password" name="password" placeholder="Password.."
+    NgPasswordValidator [options]="myOptions">
+```
+Theme as 'basic':
+```ts
+myOptions = {
+    'placement': 'top',
+    'theme': 'basic'
+}
+```
+Theme as 'pro':
+```ts
+myOptions = {
+    'placement': 'top',
+    'theme': 'pro'
+}
+```
+
 After closing the popup window, you will get one output for password validity (true/false):
 
 ```html
