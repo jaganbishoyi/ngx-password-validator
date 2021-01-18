@@ -20,7 +20,7 @@ import { defaultOptions } from "./options";
 })
 export class NgPasswordValidatorComponent implements OnInit {
     passwordStatus = {
-        "password": false,
+        password: false,
         "include-symbol": false,
         "include-number": false,
         "include-lowercase-characters": false,
