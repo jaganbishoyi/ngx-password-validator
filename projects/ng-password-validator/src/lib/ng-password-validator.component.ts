@@ -20,7 +20,7 @@ import { defaultOptions } from "./options";
 })
 export class NgPasswordValidatorComponent implements OnInit {
     passwordStatus = {
-        "password": false,
+        password: false,
         "include-symbol": false,
         "include-number": false,
         "include-lowercase-characters": false,
@@ -106,7 +106,7 @@ export class NgPasswordValidatorComponent implements OnInit {
     ngOnInit(): void {
         this.setCustomClass();
         this.setStyles();
-        this.theme();
+        this.setTheme();
         this.dataService.updatedValue.subscribe((data: IStatus) => {
             this.passwordStatus = { ... this.passwordStatus, ...data };
             for (const propName in this.passwordOptions.rules) {
@@ -246,7 +246,7 @@ export class NgPasswordValidatorComponent implements OnInit {
      *
      * @memberof NgPasswordValidatorComponent
      */
-    theme(): void {
+    setTheme(): void {
         if (this.options["theme"]) {
             this.renderer.addClass(this.elementRef.nativeElement, "popup-" + this.options["theme"]);
         }
