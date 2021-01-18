@@ -33,6 +33,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     regExpForSpecialCharacters = /^(?=.*[!@#$%^&*])([a-zA-Z0-9!@#$%^&*]*)$/;
 
     isValid = false;
+    inputValue = "";
     componentRef: any;
     elementPosition: IElementPosition;
     passwordOptions: NgPasswordValidatorOptions;
@@ -40,7 +41,6 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
 
     @Input("options") set options(value: NgPasswordValidatorOptions) {
         if (value && defaultOptions) {
-
             // Merge a `source` object to a `target` recursively
             const merge = (target: NgPasswordValidatorOptions, source: NgPasswordValidatorOptions): NgPasswordValidatorOptions => {
                 // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
@@ -55,6 +55,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
             };
 
             this.passwordOptions = merge(defaultOptions, value);
+
             if (this.passwordOptions.rules.password) {
                 switch (this.passwordOptions.rules["password"].type) {
                     case "number":
@@ -75,7 +76,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     @Input("animation-duration") animationDuration: number;
     @Input("custom-class") customClass: string;
     @Input("shadow") shadow: boolean;
-    @Input("theme") theme: string;
+    @Input("theme") theme: "basic" | "pro";
     @Input("offset") offset: number;
     @Input("width") width: number;
     @Input("max-width") maxWidth: number;
@@ -121,9 +122,10 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      *
      * @memberof NgPasswordValidatorDirective
      */
-    @HostListener("focusin")
-    onMouseEnter(): void {
+    @HostListener("focusin", ["$event.target.value"])
+    onMouseEnter(value: any): void {
         this.show();
+        this.checkPassword(value);
     }
 
     /**
@@ -179,11 +181,11 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      */
     checkPassword(inputValue: string): void {
         const data = {
-            password: inputValue.match(this.regExpForLength) ? true : false,
-            "include-symbol": inputValue.match(this.regExpForSpecialCharacters) ? true : false,
-            "include-number": inputValue.match(this.regExpForOneDigit) ? true : false,
-            "include-lowercase-characters": inputValue.match(this.regExpForOneLower) ? true : false,
-            "include-uppercase-characters": inputValue.match(this.regExpForOneUpper) ? true : false,
+            password: inputValue && inputValue.length && inputValue.match(this.regExpForLength) ? true : false,
+            "include-symbol": inputValue && inputValue.length && inputValue.match(this.regExpForSpecialCharacters) ? true : false,
+            "include-number": inputValue && inputValue.length && inputValue.match(this.regExpForOneDigit) ? true : false,
+            "include-lowercase-characters": inputValue && inputValue.length && inputValue.match(this.regExpForOneLower) ? true : false,
+            "include-uppercase-characters": inputValue && inputValue.length && inputValue.match(this.regExpForOneUpper) ? true : false,
         };
 
         for (const propName in this.passwordOptions.rules) {
