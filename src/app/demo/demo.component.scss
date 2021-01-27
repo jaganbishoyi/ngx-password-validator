@@ -3,7 +3,6 @@
 
     label {
         max-width: 400px;
-        color: #2076d2;
         margin-bottom: 0;
         width: 100%;
     }
@@ -14,23 +13,52 @@
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
         max-width: 400px;
+        border: 1px solid #ccc;
+        outline: #ccc;
 
         &:focus {
             border: 1px solid #2076d2;
+            outline: #2076d2;
         }
     }
 
     .content {
         display: flex;
-        margin: 82px auto 32px;
-        padding: 0 16px;
+        margin: 40px auto 10px;
         max-width: 960px;
         flex-direction: column;
         align-items: center;
+    }
+
+    h6.label {
+        color: #545b62;
+        font-size: 14px;
+        min-width: 80px;
+    }
+
+    .form-check-label {
+        input[type=text] {
+            padding: 5px 20px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            outline: #ccc;
+            width: 150px;
+
+            &:focus {
+                border: 1px solid #ccc;
+                outline: #ccc;
+            }
+        }
+    }
+
+    .form-check-inline {
+        margin-right: 10px;
     }
 
 }

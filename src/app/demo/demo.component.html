@@ -1,14 +1,298 @@
 <div class="demo">
-    <!-- <div class="row">
-        <div class="col-12">
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password" placeholder="Password.."
-                NgPasswordValidator="Hello" [options]="myOptions" (valid)="isValid($event)">
-        </div>
-    </div> -->
     <div class="content" role="main">
         <label for="password">Password</label>
         <input type="text" id="password" name="password" placeholder="Password.."
-            NgPasswordValidator [options]="myOptions" (valid)="isValid($event)">
+            [NgPasswordValidator]="options" (valid)="isValid($event)">
     </div>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-4 col-12">
+                <h6>Customize password policy</h6>
+                <div class="Theme">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Theme :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="theme" value="pro"
+                                formControlName="theme">Pro
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="theme" value="basic"
+                                formControlName="theme">Basic
+                        </label>
+                    </div>
+                </div>
+
+                <div class="Placement">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Placement :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="placement"
+                                value="top" formControlName="placement">Top
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="placement"
+                                value="right" formControlName="placement">Right
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="placement"
+                                value="bottom" formControlName="placement">Bottom
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="placement"
+                                value="left" formControlName="placement">Left
+                        </label>
+                    </div>
+                </div>
+
+                <div class="Shadow">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Shadow :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="shadow"
+                                [value]="true" formControlName="shadow">True
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="shadow"
+                                [value]="false" formControlName="shadow">False
+                        </label>
+                    </div>
+                </div>
+
+                <div class="custom-class form-inline">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Custom Class :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" name="custom-class"
+                                formControlName="custom-class" placeholder="custom class..">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="z-index form-inline">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">z-index :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" name="z-index"
+                                formControlName="z-index" placeholder="z-index">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="animation-duration form-inline">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Animation Duration(ms) :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" name="animation-duration"
+                                formControlName="animation-duration" placeholder="3500 ..">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="offset form-inline">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Offset :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" name="offset"
+                                formControlName="offset" placeholder="15 ..">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="width form-inline">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Width :</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" name="width"
+                                formControlName="width" placeholder="350 ..">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="max-width form-inline">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Max Width:</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" name="max-width"
+                                formControlName="max-width" placeholder="400 ..">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="max-width form-inline">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <h6 class="label">Position:</h6>
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" style="width: 70px;"
+                                name="top" formControlName="top" placeholder="top">
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="text" class="form-check-input" style="width: 70px;"
+                                name="left" formControlName="left" placeholder="left">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-12">
+                <h6>Rules</h6>
+                <div class="form-check">
+                    <label class="form-check-label" for="check1">
+                        <input type="checkbox" class="form-check-input" id="check1"
+                            name="include-symbol" formControlName="include-symbol">Include symbol
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="check2">
+                        <input type="checkbox" class="form-check-input" id="check2"
+                            name="include-number" formControlName="include-number">Include number
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="check3">
+                        <input type="checkbox" class="form-check-input" id="check3"
+                            name="include-lowercase-characters"
+                            formControlName="include-lowercase-characters">Include lowercase
+                        characters
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="check4">
+                        <input type="checkbox" class="form-check-input" id="check4"
+                            name="include-uppercase-characters"
+                            formControlName="include-uppercase-characters">Include uppercase
+                        characters
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="check5">
+                        <input type="checkbox" class="form-check-input" id="check5" name="password"
+                            formControlName="password">Password
+                    </label>
+                </div>
+
+                <ng-container *ngIf="form.get('password').value">
+                    <div class="Type mt-4">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <h6 class="label">Type :</h6>
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="type"
+                                    value="number" formControlName="type">Number
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="type"
+                                    value="range" formControlName="type">Range
+                            </label>
+                        </div>
+                    </div>
+                    <div class="width form-inline">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <h6 class="label">Length :</h6>
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="text" class="form-check-input" name="length"
+                                    formControlName="length" placeholder="8 ..">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="width form-inline">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <h6 class="label">Min :</h6>
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="text" class="form-check-input" name="min"
+                                    formControlName="min" placeholder="6 ..">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="width form-inline">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <h6 class="label">Max :</h6>
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="text" class="form-check-input" name="max"
+                                    formControlName="max" placeholder="10 ..">
+                            </label>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="col-md-4 col-12">
+                <h6 class="text-right">About</h6>
+                <p class="text-right">
+                    The password validator is a pop-up window that appears when you start typing in
+                    input box. Here you can configure the password acceptance criteria, once your
+                    enter
+                    characters fullfil the requirement you will get a success message.
+                </p>
+            </div>
+        </div>
+    </form>
 </div>
