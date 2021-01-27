@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class DemoComponent implements OnInit {
     form: FormGroup;
+    inputValue: string;
     options: NgPasswordValidatorOptions = {
         placement: "bottom",
         "animation-duration": 500
@@ -29,7 +30,7 @@ export class DemoComponent implements OnInit {
             "custom-class": [""],
             "z-index": [""],
             "animation-duration": [""],
-            offset: [""],
+            offset: ["10"],
             width: [""],
             "max-width": [""],
             top: [""],
@@ -122,6 +123,10 @@ export class DemoComponent implements OnInit {
         this.options = { ...this.options, ...value };
     }
 
+    onInput(event: any): void {
+        this.inputValue = event.target.value;
+    }
+
     /**
      * Password requirement is fulfilled or not
      *
@@ -129,11 +134,14 @@ export class DemoComponent implements OnInit {
      * @memberof DemoComponent
      */
     isValid(event: boolean): void {
-        if (event) {
-            this.toastr.success("Password is Valid.", "Successful!");
-        } else {
-            this.toastr.error("Password is invalid.", "Error!");
+        if (this.inputValue && this.inputValue.length) {
+            if (event) {
+                this.toastr.success("Password is Valid.", "Successful!");
+            } else {
+                this.toastr.error("Password is invalid.", "Error!");
+            }
         }
+
     }
 
 }

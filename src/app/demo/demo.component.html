@@ -2,7 +2,7 @@
     <div class="content" role="main">
         <label for="password">Password</label>
         <input type="text" id="password" name="password" placeholder="Password.."
-            [NgPasswordValidator]="options" (valid)="isValid($event)">
+            [NgPasswordValidator]="options" (valid)="isValid($event)" (keyup)="onInput($event)">
     </div>
     <form [formGroup]="form">
         <div class="row">
