@@ -1,6 +1,13 @@
 # Password validator for Angular
 [![npm](https://img.shields.io/npm/v/ng-password-validator.svg?maxAge=2592000)](https://www.npmjs.com/package/ng-password-validator)
 [![GitHub Contributors](https://img.shields.io/github/contributors/jaganbishoyi/ngx-password-validator.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/graphs/contributors)
+![GitHub language count](https://img.shields.io/github/languages/count/jaganbishoyi/ngx-password-validator)
+![npm bundle size](https://img.shields.io/bundlephobia/min/ng-password-validator)
+![GitHub repo size](https://img.shields.io/github/repo-size/jaganbishoyi/ngx-password-validator)
+![npm](https://img.shields.io/npm/dt/ng-password-validator)
+![NPM](https://img.shields.io/npm/l/ng-password-validator)
+![GitHub last commit](https://img.shields.io/github/last-commit/jaganbishoyi/ngx-password-validator)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/issues)
 
 The password validator is a pop-up window that appears when you start typing in input box. Here you can configure the password acceptance criteria, once your enter characters fullfil the requirement you will get a success message.
 
