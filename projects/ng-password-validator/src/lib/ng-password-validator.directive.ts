@@ -9,7 +9,7 @@ import { Subscription } from "rxjs";
 
 import { DataService } from "./data.service";
 import { NgPasswordValidatorComponent } from "./ng-password-validator.component";
-import { IElementPosition, NgPasswordValidatorOptions } from "./ng-password-validator.interface";
+import { IElementPosition, IPosition, NgPasswordValidatorOptions } from "./ng-password-validator.interface";
 import { NgPasswordValidatorService } from "./ng-password-validator.service";
 import { defaultOptions } from "./options";
 
@@ -39,38 +39,13 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     passwordOptions: NgPasswordValidatorOptions;
     componentSubscribe: Subscription;
 
-    @Input("options") set options(value: NgPasswordValidatorOptions) {
+    @Input("options") set optionsInput(value: NgPasswordValidatorOptions) {
         if (value && defaultOptions) {
-            // Merge a `source` object to a `target` recursively
-            const merge = (target: NgPasswordValidatorOptions, source: NgPasswordValidatorOptions): NgPasswordValidatorOptions => {
-                // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
-                for (const key of Object.keys(source)) {
-                    if (source[key] instanceof Object) { Object.assign(source[key], merge(target[key], source[key])); }
-                }
-
-                // Join `target` and modified `source`
-                Object.assign(target || {}, source);
-
-                return target;
-            };
-
-            this.passwordOptions = merge(defaultOptions, value);
-
-            if (this.passwordOptions.rules.password) {
-                switch (this.passwordOptions.rules["password"].type) {
-                    case "number":
-                        this.regExpForLength = new RegExp(`^(.){${this.passwordOptions.rules["password"].length}}$`);
-                        break;
-
-                    case "range":
-                        this.regExpForLength =
-                            new RegExp(`^(.){${this.passwordOptions.rules["password"].min},${this.passwordOptions.rules["password"].max}}$`);
-                }
-            }
-
+            this.passwordOptions = this.deepMerge(defaultOptions, value);
+            this.createPasswordRegex();
         }
     }
-    @Input("NgPasswordValidator") popup: string;
+    @Input("NgPasswordValidator") popup: NgPasswordValidatorOptions;
     @Input("placement") placement: string;
     @Input("z-index") zIndex: number;
     @Input("animation-duration") animationDuration: number;
@@ -80,7 +55,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     @Input("offset") offset: number;
     @Input("width") width: number;
     @Input("max-width") maxWidth: number;
-    @Input("position") position: { top: number, left: number };
+    @Input("position") position: IPosition;
 
     @Output() events: EventEmitter<any> = new EventEmitter<any>();
     @Output() valid: EventEmitter<boolean> = new EventEmitter();
@@ -106,10 +81,10 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      * Get popup position
      *
      * @readonly
-     * @type {(IElementPosition | { top: number, left: number })}
+     * @type {(IElementPosition | IPosition)}
      * @memberof NgPasswordValidatorDirective
      */
-    get popupPosition(): IElementPosition | { top: number, left: number } {
+    get popupPosition(): IElementPosition | IPosition {
         if (this.options["position"]) {
             return this.options["position"];
         } else {
@@ -124,8 +99,20 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      */
     @HostListener("focusin", ["$event.target.value"])
     onMouseEnter(value: any): void {
+        this.updatePasswordOptions();
         this.show();
         this.checkPassword(value);
+    }
+    /**
+     * Update password options
+     *
+     * @memberof NgPasswordValidatorDirective
+     */
+    updatePasswordOptions(): void {
+        if (this.popup && defaultOptions) {
+            this.passwordOptions = this.deepMerge(defaultOptions, this.popup);
+            this.createPasswordRegex();
+        }
     }
 
     /**
@@ -170,6 +157,45 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
         this.destroyPopup();
         if (this.componentSubscribe) {
             this.componentSubscribe.unsubscribe();
+        }
+    }
+
+    /**
+     * Deep merge objects
+     *
+     * @param {NgPasswordValidatorOptions} target
+     * @param {NgPasswordValidatorOptions} source
+     * @returns {NgPasswordValidatorOptions}
+     * @memberof NgPasswordValidatorDirective
+     */
+    deepMerge(target: NgPasswordValidatorOptions, source: NgPasswordValidatorOptions): NgPasswordValidatorOptions {
+        // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
+        for (const key of Object.keys(source)) {
+            if (source[key] instanceof Object) { Object.assign(source[key], this.deepMerge(target[key], source[key])); }
+        }
+
+        // Join `target` and modified `source`
+        Object.assign(target || {}, source);
+
+        return target;
+    }
+
+    /**
+     * Create password regex
+     *
+     * @memberof NgPasswordValidatorDirective
+     */
+    createPasswordRegex(): void {
+        if (this.passwordOptions.rules.password) {
+            switch (this.passwordOptions.rules["password"].type) {
+                case "number":
+                    this.regExpForLength = new RegExp(`^(.){${this.passwordOptions.rules["password"].length}}$`);
+                    break;
+
+                case "range":
+                    this.regExpForLength =
+                        new RegExp(`^(.){${this.passwordOptions.rules["password"].min},${this.passwordOptions.rules["password"].max}}$`);
+            }
         }
     }
 
@@ -331,7 +357,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      * @memberof NgPasswordValidatorDirective
      */
     applyOptionsDefault(defaultOption: NgPasswordValidatorOptions, options: { popup: SimpleChange }): void {
-        this.options = Object.assign({}, defaultOption, this.initOptions || {}, options);
+        this.optionsInput = Object.assign({}, defaultOption, this.initOptions || {}, options);
     }
 
     /**
