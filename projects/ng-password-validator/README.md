@@ -1,4 +1,6 @@
 # Password validator for Angular
+[![npm](https://img.shields.io/npm/v/ng-password-validator.svg?maxAge=2592000)](https://www.npmjs.com/package/ng-password-validator)
+[![GitHub Contributors](https://img.shields.io/github/contributors/jaganbishoyi/ngx-password-validator.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/graphs/contributors)
 
 The password validator is a pop-up window that appears when you start typing in input box. Here you can configure the password acceptance criteria, once your enter characters fullfil the requirement you will get a success message.
 
@@ -13,7 +15,7 @@ Install the npm package.
 
     npm i ng-password-validator
 
-Import `NgModule`:
+Import in `NgModule`:
 
 ```ts
 import { NgPasswordValidatorModule } from 'ng-password-validator';
@@ -36,11 +38,11 @@ You may pass as an object:
 
 ```html
 <input type="text" id="password" name="password" placeholder="Password.."
-    NgPasswordValidator [options]="myOptions">
+    [NgPasswordValidator]="options">
 ```
 Password type as 'range':
 ```ts
-myOptions = {
+options = {
     'placement': 'top',
     'password': {
         'type': "range";
@@ -53,7 +55,7 @@ myOptions = {
 ```
 Password type as 'number':
 ```ts
-myOptions = {
+options = {
     'placement': 'top',
     'password': {
         'type': "number";
@@ -68,18 +70,18 @@ Theming( Default value is pro ):
 
 ```html
 <input type="text" id="password" name="password" placeholder="Password.."
-    NgPasswordValidator [options]="myOptions">
+    [NgPasswordValidator]="options">
 ```
 Theme as 'basic':
 ```ts
-myOptions = {
+options = {
     'placement': 'top',
     'theme': 'basic'
 }
 ```
 Theme as 'pro':
 ```ts
-myOptions = {
+options = {
     'placement': 'top',
     'theme': 'pro'
 }
