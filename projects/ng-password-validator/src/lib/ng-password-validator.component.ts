@@ -5,8 +5,10 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnChanges,
     OnInit,
-    Renderer2
+    Renderer2,
+    SimpleChanges
 } from "@angular/core";
 
 import { DataService } from "./data.service";
@@ -18,7 +20,7 @@ import { defaultOptions } from "./options";
     host: { class: "popup" },
     styleUrls: ["./ng-password-validator.component.scss"]
 })
-export class NgPasswordValidatorComponent implements OnInit {
+export class NgPasswordValidatorComponent implements OnInit, OnChanges {
     passwordStatus = {
         password: false,
         "include-symbol": false,
@@ -29,7 +31,7 @@ export class NgPasswordValidatorComponent implements OnInit {
     isSecure = false;
     Show = false;
     events = new EventEmitter();
-    passwordOptions: NgPasswordValidatorOptions = defaultOptions;
+    passwordOptions: NgPasswordValidatorOptions = { ...defaultOptions };
 
     @Input() data: any;
 
@@ -85,7 +87,16 @@ export class NgPasswordValidatorComponent implements OnInit {
     }
 
     get popupOffset(): number {
-        return Number(this.data.options.offset);
+        switch (this.data.options.offset) {
+            case "":
+                return defaultOptions.offset;
+
+            case "0":
+                return +this.data.options.offset;
+
+            default:
+                return +this.data.options.offset;
+        }
     }
 
     get rules(): IRules {
@@ -116,6 +127,12 @@ export class NgPasswordValidatorComponent implements OnInit {
             }
             this.isSecure = Object.values(this.passwordStatus).every((value: boolean) => value);
         });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes && changes.data && changes.data.currentValue) {
+            this.data = changes.data.currentValue;
+        }
     }
 
     /**
@@ -259,7 +276,7 @@ export class NgPasswordValidatorComponent implements OnInit {
      * @memberof NgPasswordValidatorComponent
      */
     setAnimationDuration(): void {
-        this.hostStyleTransition = "opacity " + this.options["animationDuration"] + "ms";
+        this.hostStyleTransition = "opacity " + this.options["animation-duration"] + "ms";
     }
 
     /**
@@ -272,7 +289,7 @@ export class NgPasswordValidatorComponent implements OnInit {
         this.setAnimationDuration();
 
         this.hostClassShadow = this.options["shadow"];
-        this.hostStyleMaxWidth = this.options["maxWidth"] + "px";
+        this.hostStyleMaxWidth = this.options["max-width"] + "px";
         this.hostStyleWidth = this.options["width"] ? this.options["width"] + "px" : "";
     }
 }
