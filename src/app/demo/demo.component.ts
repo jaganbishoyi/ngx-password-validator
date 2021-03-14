@@ -16,6 +16,29 @@ export class DemoComponent implements OnInit {
         "animation-duration": 500
     };
 
+    defaultOptions = {
+        placement: "bottom",
+        "z-index": 0,
+        "custom-class": "custom-class",
+        shadow: true,
+        theme: "pro",
+        offset: 8,
+        heading: "Password Policy",
+        successMessage: "Awesome! Password requirement fulfilled.",
+        rules: {
+            password: {
+                type: "range",
+                length: 8,
+                min: 6,
+                max: 10,
+            },
+            "include-symbol": true,
+            "include-number": true,
+            "include-lowercase-characters": true,
+            "include-uppercase-characters": true,
+        }
+    };
+
     ngOnInit(): void {
         this.formInIt();
     }
@@ -44,6 +67,8 @@ export class DemoComponent implements OnInit {
             length: [""],
             min: ["6"],
             max: ["10"],
+            heading: [""],
+            successMessage: [""],
         });
 
         this.formOnChange();
@@ -121,10 +146,20 @@ export class DemoComponent implements OnInit {
         delete value.max;
 
         this.options = { ...this.options, ...value };
+        this.applyDefault(this.options);
+
     }
 
     onInput(event: any): void {
         this.inputValue = event.target.value;
+    }
+
+    applyDefault(obj) {
+        for (let propName in obj) {
+            if (obj[propName] === "") {
+                this.options[propName] = this.defaultOptions[propName];
+            }
+        }
     }
 
     /**

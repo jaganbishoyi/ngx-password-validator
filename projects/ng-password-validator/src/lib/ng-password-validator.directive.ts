@@ -3,7 +3,17 @@ import {
     ComponentFactoryResolver,
     Directive,
     ElementRef,
-    EmbeddedViewRef, EventEmitter, HostListener, Inject, Injector, Input, OnChanges, OnDestroy, Optional, Output, SimpleChange
+    EmbeddedViewRef,
+    EventEmitter,
+    HostListener,
+    Inject,
+    Injector,
+    Input,
+    OnChanges,
+    OnDestroy,
+    Optional,
+    Output,
+    SimpleChange
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
@@ -56,6 +66,8 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     @Input("width") width: number;
     @Input("max-width") maxWidth: number;
     @Input("position") position: IPosition;
+    @Input("heading") heading: string;
+    @Input("successMessage") successMessage: string;
 
     @Output() events: EventEmitter<any> = new EventEmitter<any>();
     @Output() valid: EventEmitter<boolean> = new EventEmitter();
@@ -145,7 +157,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      */
     ngOnChanges(changes: { popup: SimpleChange }): void {
         const changedOptions = this.getProperties(changes);
-        this.applyOptionsDefault(defaultOptions, changedOptions);
+        this.applyOptionsDefault(changedOptions, defaultOptions);
     }
 
     /**
@@ -356,8 +368,8 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      * @param {{ popup: SimpleChange }} options
      * @memberof NgPasswordValidatorDirective
      */
-    applyOptionsDefault(defaultOption: NgPasswordValidatorOptions, options: { popup: SimpleChange }): void {
-        this.optionsInput = Object.assign({}, defaultOption, this.initOptions || {}, options);
+    applyOptionsDefault(options: { popup: SimpleChange }, defaultOption: NgPasswordValidatorOptions): void {
+        this.initOptions = Object.assign({}, this.initOptions || {}, options, defaultOption);
     }
 
     /**

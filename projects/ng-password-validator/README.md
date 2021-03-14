@@ -94,6 +94,19 @@ options = {
 }
 ```
 
+You can also change Popup header and success message:
+
+```html
+<input type="text" id="password" name="password" placeholder="Password.."
+    [NgPasswordValidator]="options">
+```
+```ts
+options = {
+    'heading': 'Password Requirement',
+    'successMessage': 'Wow! Password is Strong.'
+}
+```
+
 After closing the popup window, you will get one output for password validity (true/false):
 
 ```html
@@ -131,6 +144,7 @@ And pass your parameters when importing the module:
     ]
 })
 ```
+
 
 ## Properties
 

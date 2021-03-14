@@ -1,6 +1,6 @@
 {
     "name": "ng-password-validator",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "description": "The password validator is a pop-up window that appears when you start typing in input box. Here you can configure the password acceptance criteria, once your enter characters fullfil the requirement you will get a success message.",
     "author": "Jagan Mohan Bishoyi",
     "license": "MIT",
