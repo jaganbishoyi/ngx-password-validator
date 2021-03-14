@@ -10,6 +10,8 @@ export interface NgPasswordValidatorOptions {
     "max-width"?: number;
     "position"?: IPosition;
     "rules"?: IRules;
+    "heading"?: string;
+    "successMessage"?: string;
 }
 export interface IRules {
     "password"?: false | IPassword;

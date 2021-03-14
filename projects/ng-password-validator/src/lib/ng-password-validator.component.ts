@@ -21,6 +21,8 @@ import { defaultOptions } from "./options";
     styleUrls: ["./ng-password-validator.component.scss"]
 })
 export class NgPasswordValidatorComponent implements OnInit, OnChanges {
+    heading: string;
+    successMessage: string;
     passwordStatus = {
         password: false,
         "include-symbol": false,
@@ -118,6 +120,7 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
         this.setCustomClass();
         this.setStyles();
         this.setTheme();
+        this.setCustomText();
         this.dataService.updatedValue.subscribe((data: IStatus) => {
             this.passwordStatus = { ... this.passwordStatus, ...data };
             for (const propName in this.passwordOptions.rules) {
@@ -266,6 +269,16 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
     setTheme(): void {
         if (this.options["theme"]) {
             this.renderer.addClass(this.elementRef.nativeElement, "popup-" + this.options["theme"]);
+        }
+    }
+
+    setCustomText(): void {
+        if (this.options["heading"]) {
+            this.heading = this.options["heading"];
+        }
+
+        if (this.options["successMessage"]) {
+            this.successMessage = this.options["successMessage"];
         }
     }
 

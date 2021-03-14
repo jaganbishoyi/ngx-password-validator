@@ -7,6 +7,8 @@ export const defaultOptions: NgPasswordValidatorOptions = {
     shadow: true,
     theme: "pro",
     offset: 8,
+    heading: "Password Policy",
+    successMessage: "Awesome! Password requirement fulfilled.",
     rules: {
         password: {
             type: "range",
