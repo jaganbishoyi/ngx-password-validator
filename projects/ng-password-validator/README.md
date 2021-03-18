@@ -1,5 +1,5 @@
 # Password validator for Angular
-[![npm](https://img.shields.io/npm/v/ng-password-validator.svg?maxAge=2592000)](https://www.npmjs.com/package/ng-password-validator)
+[![npm](https://img.shields.io/npm/v/ng-password-validator.svg?style=flat-square)](https://www.npmjs.com/package/ng-password-validator)
 [![GitHub Contributors](https://img.shields.io/github/contributors/jaganbishoyi/ngx-password-validator.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/graphs/contributors)
 ![GitHub language count](https://img.shields.io/github/languages/count/jaganbishoyi/ngx-password-validator)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/ng-password-validator)
@@ -148,20 +148,22 @@ And pass your parameters when importing the module:
 
 ## Properties
 
-| name               | type                             | default   | description                                                                     |
-| ------------------ | -------------------------------- | --------- | ------------------------------------------------------------------------------- |
-| placement          | "top", "bottom", "left", "right" | "bottom"  | The position of the popup window.                                               |
-| z-index            | number                           | 0         | Z-index of the popup window.                                                    |
-| trigger            | "focus"                          |           | Specifies how the popup window is triggered.                                    |
-| popup-class        | string                           |           | Classes to be passed to the popup window.                                       |
-| animation-duration | number                           | 300       | The duration controls how long the animation takes to run from start to finish. |
-| theme              | "basic"                          | "basic"   | Theme of popup window background and text.                                      |
-| shadow             | boolean                          | true      | Shadow of the popup window.                                                     |
-| offset             | number                           | 8         | Offset the popup window relative to the item.                                   |
-| width              | number                           | undefined | Width of the popup window.                                                      |
-| max-width          | number                           | 390       | Maximum width of the popup window.                                              |
-| pointerEvents      | "auto", "none"                   | "none"    | Defines whether or not an element reacts to pointer events.                     |
-| position           | {top: number, left: number}      | undefined | The popup window coordinates relative to the browser window.                    |
+| name               | type                             | default                                  | description                                                                     |
+| ------------------ | -------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------- |
+| placement          | "top", "bottom", "left", "right" | "bottom"                                 | The position of the popup window.                                               |
+| z-index            | number                           | 0                                        | Z-index of the popup window.                                                    |
+| trigger            | "focus"                          |                                          | Specifies how the popup window is triggered.                                    |
+| popup-class        | string                           |                                          | Classes to be passed to the popup window.                                       |
+| heading            | string                           | Password Policy                          | Heading of popup window.                                                        |
+| successMessage     | string                           | Awesome! Password requirement fulfilled. | Success message after requirements fulfilled.                                   |
+| animation-duration | number                           | 300                                      | The duration controls how long the animation takes to run from start to finish. |
+| theme              | "basic"                          | "basic"                                  | Theme of popup window background and text.                                      |
+| shadow             | boolean                          | true                                     | Shadow of the popup window.                                                     |
+| offset             | number                           | 8                                        | Offset the popup window relative to the item.                                   |
+| width              | number                           | undefined                                | Width of the popup window.                                                      |
+| max-width          | number                           | 390                                      | Maximum width of the popup window.                                              |
+| pointerEvents      | "auto", "none"                   | "none"                                   | Defines whether or not an element reacts to pointer events.                     |
+| position           | {top: number, left: number}      | undefined                                | The popup window coordinates relative to the browser window.                    |
 
 
 ## Events
