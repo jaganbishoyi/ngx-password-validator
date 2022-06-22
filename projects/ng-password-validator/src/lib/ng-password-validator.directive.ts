@@ -13,13 +13,17 @@ import {
     OnDestroy,
     Optional,
     Output,
-    SimpleChange
+    SimpleChange,
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { DataService } from "./data.service";
 import { NgPasswordValidatorComponent } from "./ng-password-validator.component";
-import { IElementPosition, IPosition, NgPasswordValidatorOptions } from "./ng-password-validator.interface";
+import {
+    IElementPosition,
+    IPosition,
+    NgPasswordValidatorOptions,
+} from "./ng-password-validator.interface";
 import { NgPasswordValidatorService } from "./ng-password-validator.service";
 import { defaultOptions } from "./options";
 
@@ -34,7 +38,6 @@ export interface HostComponent {
     selector: "[NgPasswordValidator]",
     exportAs: "NgPasswordValidator",
 })
-
 export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     regExpForLength = /^(.){8}$/;
     regExpForOneUpper = /^(?=.*[A-Z])(.*)$/;
@@ -78,8 +81,8 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
         private componentFactoryResolver: ComponentFactoryResolver,
         private appRef: ApplicationRef,
         private dataService: DataService,
-        private injector: Injector) {
-    }
+        private injector: Injector
+    ) {}
 
     get options() {
         return this.passwordOptions;
@@ -180,10 +183,18 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      * @returns {NgPasswordValidatorOptions}
      * @memberof NgPasswordValidatorDirective
      */
-    deepMerge(target: NgPasswordValidatorOptions, source: NgPasswordValidatorOptions): NgPasswordValidatorOptions {
+    deepMerge(
+        target: NgPasswordValidatorOptions,
+        source: NgPasswordValidatorOptions
+    ): NgPasswordValidatorOptions {
         // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
         for (const key of Object.keys(source)) {
-            if (source[key] instanceof Object) { Object.assign(source[key], this.deepMerge(target[key], source[key])); }
+            if (source[key] instanceof Object) {
+                Object.assign(
+                    source[key],
+                    this.deepMerge(target[key], source[key])
+                );
+            }
         }
 
         // Join `target` and modified `source`
@@ -201,12 +212,15 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
         if (this.passwordOptions.rules.password) {
             switch (this.passwordOptions.rules["password"].type) {
                 case "number":
-                    this.regExpForLength = new RegExp(`^(.){${this.passwordOptions.rules["password"].length}}$`);
+                    this.regExpForLength = new RegExp(
+                        `^(.){${this.passwordOptions.rules["password"].length}}$`
+                    );
                     break;
 
                 case "range":
-                    this.regExpForLength =
-                        new RegExp(`^(.){${this.passwordOptions.rules["password"].min},${this.passwordOptions.rules["password"].max}}$`);
+                    this.regExpForLength = new RegExp(
+                        `^(.){${this.passwordOptions.rules["password"].min},${this.passwordOptions.rules["password"].max}}$`
+                    );
             }
         }
     }
@@ -219,11 +233,36 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      */
     checkPassword(inputValue: string): void {
         const data = {
-            password: inputValue && inputValue.length && inputValue.match(this.regExpForLength) ? true : false,
-            "include-symbol": inputValue && inputValue.length && inputValue.match(this.regExpForSpecialCharacters) ? true : false,
-            "include-number": inputValue && inputValue.length && inputValue.match(this.regExpForOneDigit) ? true : false,
-            "include-lowercase-characters": inputValue && inputValue.length && inputValue.match(this.regExpForOneLower) ? true : false,
-            "include-uppercase-characters": inputValue && inputValue.length && inputValue.match(this.regExpForOneUpper) ? true : false,
+            password:
+                inputValue &&
+                inputValue.length &&
+                inputValue.match(this.regExpForLength)
+                    ? true
+                    : false,
+            "include-symbol":
+                inputValue &&
+                inputValue.length &&
+                inputValue.match(this.regExpForSpecialCharacters)
+                    ? true
+                    : false,
+            "include-number":
+                inputValue &&
+                inputValue.length &&
+                inputValue.match(this.regExpForOneDigit)
+                    ? true
+                    : false,
+            "include-lowercase-characters":
+                inputValue &&
+                inputValue.length &&
+                inputValue.match(this.regExpForOneLower)
+                    ? true
+                    : false,
+            "include-uppercase-characters":
+                inputValue &&
+                inputValue.length &&
+                inputValue.match(this.regExpForOneUpper)
+                    ? true
+                    : false,
         };
 
         for (const propName in this.passwordOptions.rules) {
@@ -247,7 +286,6 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
         let customProperties: any = {};
         let allProperties: any = {};
 
-        // tslint:disable-next-line: forin
         for (const prop in changes) {
             if (prop !== "options") {
                 directiveProperties[prop] = changes[prop].currentValue;
@@ -257,7 +295,11 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
             }
         }
 
-        allProperties = Object.assign({}, customProperties, directiveProperties);
+        allProperties = Object.assign(
+            {},
+            customProperties,
+            directiveProperties
+        );
 
         return allProperties;
     }
@@ -268,7 +310,8 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      * @memberof NgPasswordValidatorDirective
      */
     getElementPosition(): void {
-        this.elementPosition = this.elementRef.nativeElement.getBoundingClientRect();
+        this.elementPosition =
+            this.elementRef.nativeElement.getBoundingClientRect();
     }
 
     /**
@@ -300,7 +343,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
             this.componentRef.destroy();
             this.events.emit({
                 type: "hidden",
-                position: this.popupPosition
+                position: this.popupPosition,
             });
         }
     }
@@ -314,7 +357,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
         (this.componentRef.instance as HostComponent).show = true;
         this.events.emit({
             type: "show",
-            position: this.popupPosition
+            position: this.popupPosition,
         });
     }
 
@@ -331,7 +374,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
         (this.componentRef.instance as HostComponent).show = false;
         this.events.emit({
             type: "hide",
-            position: this.popupPosition
+            position: this.popupPosition,
         });
     }
 
@@ -349,14 +392,17 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
             element: this.elementRef.nativeElement,
             elementPosition: this.popupPosition,
             options: this.options,
-            defaultOptions
+            defaultOptions,
         };
 
         this.appRef.attachView(this.componentRef.hostView);
-        const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
+            .rootNodes[0] as HTMLElement;
         document.body.appendChild(domElem);
 
-        this.componentSubscribe = (this.componentRef.instance as HostComponent).events.subscribe((event: any) => {
+        this.componentSubscribe = (
+            this.componentRef.instance as HostComponent
+        ).events.subscribe((event: any) => {
             this.handleEvents(event);
         });
     }
@@ -368,8 +414,16 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
      * @param {{ popup: SimpleChange }} options
      * @memberof NgPasswordValidatorDirective
      */
-    applyOptionsDefault(options: { popup: SimpleChange }, defaultOption: NgPasswordValidatorOptions): void {
-        this.initOptions = Object.assign({}, this.initOptions || {}, options, defaultOption);
+    applyOptionsDefault(
+        options: { popup: SimpleChange },
+        defaultOption: NgPasswordValidatorOptions
+    ): void {
+        this.initOptions = Object.assign(
+            {},
+            this.initOptions || {},
+            options,
+            defaultOption
+        );
     }
 
     /**
@@ -382,7 +436,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
         if (event.type === "shown") {
             this.events.emit({
                 type: "shown",
-                position: this.popupPosition
+                position: this.popupPosition,
             });
         }
     }

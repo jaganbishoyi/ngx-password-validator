@@ -62,3 +62,14 @@
     }
 
 }
+
+::ng-deep {
+    .custom-class {
+        .popup-window {
+            .heading {
+                color: red !important;
+                font-family: cursive;
+            }
+        }
+    }
+}

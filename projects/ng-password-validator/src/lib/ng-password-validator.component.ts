@@ -8,17 +8,22 @@ import {
     OnChanges,
     OnInit,
     Renderer2,
-    SimpleChanges
+    SimpleChanges,
 } from "@angular/core";
 
 import { DataService } from "./data.service";
-import { IElementPosition, IRules, IStatus, NgPasswordValidatorOptions } from "./ng-password-validator.interface";
+import {
+    IElementPosition,
+    IRules,
+    IStatus,
+    NgPasswordValidatorOptions,
+} from "./ng-password-validator.interface";
 import { defaultOptions } from "./options";
 @Component({
     selector: "NgPasswordValidator",
     templateUrl: "./ng-password-validator.component.html",
     host: { class: "popup" },
-    styleUrls: ["./ng-password-validator.component.scss"]
+    styleUrls: ["./ng-password-validator.component.scss"],
 })
 export class NgPasswordValidatorComponent implements OnInit, OnChanges {
     heading: string;
@@ -56,7 +61,7 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
     transitionEnd(): void {
         if (this.show) {
             this.events.emit({
-                type: "shown"
+                type: "shown",
             });
         }
     }
@@ -102,14 +107,21 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
     }
 
     get rules(): IRules {
-        return { ...this.data.defaultOptions.rules, ... this.data.options.rules };
+        return {
+            ...this.data.defaultOptions.rules,
+            ...this.data.options.rules,
+        };
     }
 
     get defaultOptions(): NgPasswordValidatorOptions {
         return this.data.defaultOptions;
     }
 
-    constructor(private elementRef: ElementRef, private renderer: Renderer2, private dataService: DataService) { }
+    constructor(
+        private elementRef: ElementRef,
+        private renderer: Renderer2,
+        private dataService: DataService
+    ) {}
 
     /**
      * Component initialization
@@ -122,13 +134,15 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
         this.setTheme();
         this.setCustomText();
         this.dataService.updatedValue.subscribe((data: IStatus) => {
-            this.passwordStatus = { ... this.passwordStatus, ...data };
+            this.passwordStatus = { ...this.passwordStatus, ...data };
             for (const propName in this.passwordOptions.rules) {
                 if (!this.passwordOptions.rules[propName]) {
                     delete this.passwordStatus[propName];
                 }
             }
-            this.isSecure = Object.values(this.passwordStatus).every((value: boolean) => value);
+            this.isSecure = Object.values(this.passwordStatus).every(
+                (value: boolean) => value
+            );
         });
     }
 
@@ -178,7 +192,10 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
      * @memberof NgPasswordValidatorComponent
      */
     setPlacementClass(placement: string): void {
-        this.renderer.addClass(this.elementRef.nativeElement, "popup-" + placement);
+        this.renderer.addClass(
+            this.elementRef.nativeElement,
+            "popup-" + placement
+        );
     }
 
     /**
@@ -193,8 +210,12 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
         const popup = this.elementRef.nativeElement;
         const isCustomPosition = !this.elementPosition.right;
 
-        let elementHeight = isSvg ? this.element.getBoundingClientRect().height : this.element.offsetHeight;
-        let elementWidth = isSvg ? this.element.getBoundingClientRect().width : this.element.offsetWidth;
+        let elementHeight = isSvg
+            ? this.element.getBoundingClientRect().height
+            : this.element.offsetHeight;
+        let elementWidth = isSvg
+            ? this.element.getBoundingClientRect().width
+            : this.element.offsetWidth;
         const popupHeight = popup.clientHeight;
         const popupWidth = popup.clientWidth;
         const scrollY = window.pageYOffset;
@@ -209,26 +230,34 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
 
         switch (placement) {
             case "top":
-                topStyle = (this.elementPosition.top + scrollY) - (popupHeight + this.popupOffset);
+                topStyle =
+                    this.elementPosition.top +
+                    scrollY -
+                    (popupHeight + this.popupOffset);
                 leftStyle = this.elementPosition.left;
 
                 break;
 
             case "bottom":
-                topStyle = (this.elementPosition.top + scrollY) + elementHeight + this.popupOffset;
+                topStyle =
+                    this.elementPosition.top +
+                    scrollY +
+                    elementHeight +
+                    this.popupOffset;
                 leftStyle = this.elementPosition.left;
 
                 break;
             case "left":
-                leftStyle = this.elementPosition.left - popupWidth - this.popupOffset;
-                topStyle = (this.elementPosition.top + scrollY);
+                leftStyle =
+                    this.elementPosition.left - popupWidth - this.popupOffset;
+                topStyle = this.elementPosition.top + scrollY;
 
                 break;
 
             case "right":
-                leftStyle = this.elementPosition.left + elementWidth + this.popupOffset;
-                topStyle = (this.elementPosition.top + scrollY);
-
+                leftStyle =
+                    this.elementPosition.left + elementWidth + this.popupOffset;
+                topStyle = this.elementPosition.top + scrollY;
         }
 
         this.hostStyleTop = topStyle + "px";
@@ -254,10 +283,15 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
      * @memberof NgPasswordValidatorComponent
      */
     setCustomClass(): void {
-        if (this.options["customClass"]) {
-            this.options["customClass"].split(" ").forEach((className: string) => {
-                this.renderer.addClass(this.elementRef.nativeElement, className);
-            });
+        if (this.options["custom-class"]) {
+            this.options["custom-class"]
+                .split(" ")
+                .forEach((className: string) => {
+                    this.renderer.addClass(
+                        this.elementRef.nativeElement,
+                        className
+                    );
+                });
         }
     }
 
@@ -268,7 +302,10 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
      */
     setTheme(): void {
         if (this.options["theme"]) {
-            this.renderer.addClass(this.elementRef.nativeElement, "popup-" + this.options["theme"]);
+            this.renderer.addClass(
+                this.elementRef.nativeElement,
+                "popup-" + this.options["theme"]
+            );
         }
     }
 
@@ -282,14 +319,14 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
         }
     }
 
-
     /**
      * Sets the animation duration
      *
      * @memberof NgPasswordValidatorComponent
      */
     setAnimationDuration(): void {
-        this.hostStyleTransition = "opacity " + this.options["animation-duration"] + "ms";
+        this.hostStyleTransition =
+            "opacity " + this.options["animation-duration"] + "ms";
     }
 
     /**
@@ -303,6 +340,8 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
 
         this.hostClassShadow = this.options["shadow"];
         this.hostStyleMaxWidth = this.options["max-width"] + "px";
-        this.hostStyleWidth = this.options["width"] ? this.options["width"] + "px" : "";
+        this.hostStyleWidth = this.options["width"]
+            ? this.options["width"] + "px"
+            : "";
     }
 }

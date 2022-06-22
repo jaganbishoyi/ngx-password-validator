@@ -6,14 +6,15 @@ import { ToastrService } from "ngx-toastr";
 @Component({
     selector: "app-demo",
     templateUrl: "./demo.component.html",
-    styleUrls: ["./demo.component.scss"]
+    styleUrls: ["./demo.component.scss"],
 })
 export class DemoComponent implements OnInit {
     form: FormGroup;
     inputValue: string;
     options: NgPasswordValidatorOptions = {
         placement: "bottom",
-        "animation-duration": 500
+        "custom-class": "custom-class",
+        "animation-duration": 500,
     };
 
     defaultOptions = {
@@ -36,21 +37,24 @@ export class DemoComponent implements OnInit {
             "include-number": true,
             "include-lowercase-characters": true,
             "include-uppercase-characters": true,
-        }
+        },
     };
 
     ngOnInit(): void {
         this.formInIt();
     }
 
-    constructor(private formBuilder: FormBuilder, private toastr: ToastrService) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private toastr: ToastrService
+    ) {}
 
     formInIt(): void {
         this.form = this.formBuilder.group({
             theme: ["pro"],
             placement: ["bottom"],
             shadow: [true],
-            "custom-class": [""],
+            "custom-class": ["jagan"],
             "z-index": [""],
             "animation-duration": [""],
             offset: ["10"],
@@ -82,20 +86,23 @@ export class DemoComponent implements OnInit {
     formOnChange(): void {
         this.form.valueChanges.subscribe((value: any) => {
             this.options["rules"] = {
-                "include-lowercase-characters": value["include-lowercase-characters"],
-                "include-uppercase-characters": value["include-uppercase-characters"],
+                "include-lowercase-characters":
+                    value["include-lowercase-characters"],
+                "include-uppercase-characters":
+                    value["include-uppercase-characters"],
                 "include-symbol": value["include-symbol"],
                 "include-number": value["include-number"],
-                password: value.password ? {
-                    type: value.type,
-                    length: value.length,
-                    min: value.min,
-                    max: value.max,
-                } : false
+                password: value.password
+                    ? {
+                          type: value.type,
+                          length: value.length,
+                          min: value.min,
+                          max: value.max,
+                      }
+                    : false,
             };
 
             this.updateOptions({ ...value });
-
         });
 
         this.form.get("type").valueChanges.subscribe((type: string) => {
@@ -114,20 +121,23 @@ export class DemoComponent implements OnInit {
                         max: "",
                     });
             }
-
         });
 
         this.form.get("top").valueChanges.subscribe((top: string) => {
             this.options["position"] = {
                 top: +top,
-                left: this.form.get("left").value ? +this.form.get("left").value : 0
+                left: this.form.get("left").value
+                    ? +this.form.get("left").value
+                    : 0,
             };
         });
 
         this.form.get("left").valueChanges.subscribe((left: string) => {
             this.options["position"] = {
                 left: +left,
-                top: this.form.get("top").value ? +this.form.get("top").value : 0
+                top: this.form.get("top").value
+                    ? +this.form.get("top").value
+                    : 0,
             };
         });
     }
@@ -147,7 +157,6 @@ export class DemoComponent implements OnInit {
 
         this.options = { ...this.options, ...value };
         this.applyDefault(this.options);
-
     }
 
     onInput(event: any): void {
@@ -176,7 +185,5 @@ export class DemoComponent implements OnInit {
                 this.toastr.error("Password is invalid.", "Error!");
             }
         }
-
     }
-
 }
