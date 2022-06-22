@@ -1,9 +1,12 @@
-import { IStatus, NgPasswordValidatorOptions } from "./ng-password-validator.interface";
+import {
+    IStatus,
+    NgPasswordValidatorOptions,
+} from "./ng-password-validator.interface";
 
 export const defaultOptions: NgPasswordValidatorOptions = {
     placement: "bottom",
     "z-index": 0,
-    "custom-class": "custom-class",
+    "custom-class": "",
     shadow: true,
     theme: "pro",
     offset: 8,
@@ -20,7 +23,7 @@ export const defaultOptions: NgPasswordValidatorOptions = {
         "include-number": true,
         "include-lowercase-characters": true,
         "include-uppercase-characters": true,
-    }
+    },
 };
 
 export const initializeStage: IStatus = {

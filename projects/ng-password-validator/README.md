@@ -51,10 +51,13 @@ Password type as 'range':
 ```ts
 options = {
     'placement': 'top',
-    'password': {
-        'type': "range";
-        'min': 6;
-        'max': 10;
+    'rules': {
+        'password': {
+            'type': "range",
+            'min': 6,
+            'max': 10,
+            // No need to pass length
+        }
     },
     'shadow': false,
     'offset': 15,
@@ -64,9 +67,12 @@ Password type as 'number':
 ```ts
 options = {
     'placement': 'top',
-    'password': {
-        'type': "number";
-        'length': 8;
+    'rules': {
+        'password': {
+            'type': "number",
+            'length': 8,
+            // No need to pass min and max
+        }
     },
     'shadow': false,
     'offset': 15,
@@ -128,8 +134,13 @@ import { NgPasswordValidatorModule, NgPasswordValidatorOptions } from "ng-passwo
 export const MyDefaultOptions: NgPasswordValidatorOptions = {
     placement: "right",
     rules: {
+        'password': {
+            'type': "range",
+            'min': 6,
+            'max': 10,
+        },
         "include-symbol": true,
-        "include-number": true,
+        "include-number": false,
         "include-lowercase-characters": true,
         "include-uppercase-characters": false,
     }
@@ -153,7 +164,7 @@ And pass your parameters when importing the module:
 | placement          | "top", "bottom", "left", "right" | "bottom"                                 | The position of the popup window.                                               |
 | z-index            | number                           | 0                                        | Z-index of the popup window.                                                    |
 | trigger            | "focus"                          |                                          | Specifies how the popup window is triggered.                                    |
-| popup-class        | string                           |                                          | Classes to be passed to the popup window.                                       |
+| custom-class       | string                           |                                          | Classes to be passed to the popup window.                                       |
 | heading            | string                           | Password Policy                          | Heading of popup window.                                                        |
 | successMessage     | string                           | Awesome! Password requirement fulfilled. | Success message after requirements fulfilled.                                   |
 | animation-duration | number                           | 300                                      | The duration controls how long the animation takes to run from start to finish. |
