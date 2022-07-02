@@ -125,6 +125,32 @@ isValid(event: boolean) {
 }
 ```
 
+## Custom class configuration:
+In Component HTML file
+```html
+<input type="text" id="password" name="password" placeholder="Password.."
+    [NgPasswordValidator]="options">
+```
+In Component TS file
+```ts
+options = {
+    'custom-class': 'custom-class',
+}
+```
+In Component SCSS file
+```CSS
+::ng-deep {
+    .custom-class {
+        .popup-window {
+            .heading {
+                color: red !important;
+                font-family: cursive;
+            }
+        }
+    }
+}
+```
+
 ## Set default values
 
 In app.module.ts export the default options like below:

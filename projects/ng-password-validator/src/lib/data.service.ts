@@ -6,19 +6,10 @@ import { initializeStage } from "./options";
 
 @Injectable()
 export class DataService {
-
     private value = new BehaviorSubject(initializeStage);
     updatedValue = this.value.asObservable();
 
-
-    /**
-     * Update value
-     *
-     * @param {IStatus} data
-     * @memberof DataService
-     */
     updateValue(data: IStatus): void {
         this.value.next(data);
     }
-
 }
