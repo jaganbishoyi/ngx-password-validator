@@ -4,7 +4,7 @@ import { DataService } from './data.service';
 import { NgPasswordValidatorComponent } from './ng-password-validator.component';
 import { NgPasswordValidatorDirective } from './ng-password-validator.directive';
 import { NgPasswordValidatorOptions } from './ng-password-validator.interface';
-import { NgPasswordValidatorTestService } from './ng-password-validator.service';
+import { NgPasswordValidatorService } from './ng-password-validator.service';
 
 @NgModule({
   declarations: [NgPasswordValidatorDirective, NgPasswordValidatorComponent],
@@ -29,7 +29,7 @@ export class NgPasswordValidatorModule {
       ngModule: NgPasswordValidatorModule,
       providers: [
         {
-          provide: NgPasswordValidatorTestService,
+          provide: NgPasswordValidatorService,
           useValue: initOptions,
         },
       ],

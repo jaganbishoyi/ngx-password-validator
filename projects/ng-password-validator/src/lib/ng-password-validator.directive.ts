@@ -24,7 +24,7 @@ import {
   IPosition,
   NgPasswordValidatorOptions,
 } from './ng-password-validator.interface';
-import { NgPasswordValidatorTestService } from './ng-password-validator.service';
+import { NgPasswordValidatorService } from './ng-password-validator.service';
 import { defaultOptions } from './options';
 
 export interface HostComponent {
@@ -76,7 +76,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
   @Output() valid: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
-    @Optional() @Inject(NgPasswordValidatorTestService) private initOptions,
+    @Optional() @Inject(NgPasswordValidatorService) private initOptions,
     private elementRef: ElementRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
