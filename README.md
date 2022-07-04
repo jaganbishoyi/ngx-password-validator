@@ -1,5 +1,9 @@
 # Password validator for Angular
+<<<<<<< HEAD
 
+=======
+## NOTE: Users are requeested to use v1.2.2 ( npm i ng-password-validator@1.2.2 ) while I am working on the breaking changes on higher versions.
+>>>>>>> 488a32c8cac2009a3c679abb8ab8b0620b704dbb
 [![npm](https://img.shields.io/npm/v/ng-password-validator.svg?style=flat-square)](https://www.npmjs.com/package/ng-password-validator)
 [![GitHub Contributors](https://img.shields.io/github/contributors/jaganbishoyi/ngx-password-validator.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/graphs/contributors)
 ![GitHub language count](https://img.shields.io/github/languages/count/jaganbishoyi/ngx-password-validator)
