@@ -1,5 +1,4 @@
 # Password validator for Angular
-## NOTE: Users are requeested to use v1.2.2 ( npm i ng-password-validator@1.2.2 ) while I am working on the breaking changes on higher versions.
 [![npm](https://img.shields.io/npm/v/ng-password-validator.svg?style=flat-square)](https://www.npmjs.com/package/ng-password-validator)
 [![GitHub Contributors](https://img.shields.io/github/contributors/jaganbishoyi/ngx-password-validator.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/graphs/contributors)
 ![GitHub language count](https://img.shields.io/github/languages/count/jaganbishoyi/ngx-password-validator)
@@ -224,7 +223,7 @@ When you call events, the delays that are specified in the options in the direct
 
 License under the MIT License (MIT)
 
-Copyright (c) 2020-2021 [Jagan Mohan Bishoyi](http://jaganbishoyi.github.io/)
+Copyright (c) 2020-2022 [Jagan Mohan Bishoyi](http://jaganbishoyi.github.io/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
