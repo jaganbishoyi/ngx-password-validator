@@ -1,6 +1,6 @@
 {
     "name": "ngx-password-validator",
-    "version": "1.3.3",
+    "version": "1.4.5",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
