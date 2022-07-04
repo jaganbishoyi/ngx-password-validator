@@ -1,4 +1,5 @@
 # Password validator for Angular
+## NOTE: Users are requeested to use v1.2.2 ( npm i ng-password-validator@1.2.2 ) while I am working on the breaking changes on higher versions.
 [![npm](https://img.shields.io/npm/v/ng-password-validator.svg?style=flat-square)](https://www.npmjs.com/package/ng-password-validator)
 [![GitHub Contributors](https://img.shields.io/github/contributors/jaganbishoyi/ngx-password-validator.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/graphs/contributors)
 ![GitHub language count](https://img.shields.io/github/languages/count/jaganbishoyi/ngx-password-validator)
@@ -122,6 +123,32 @@ After closing the popup window, you will get one output for password validity (t
 ```ts
 isValid(event: boolean) {
     this.isPasswordValid = event;
+}
+```
+
+## Custom class configuration:
+In Component HTML file
+```html
+<input type="text" id="password" name="password" placeholder="Password.."
+    [NgPasswordValidator]="options">
+```
+In Component TS file
+```ts
+options = {
+    'custom-class': 'custom-class',
+}
+```
+In Component SCSS file
+```CSS
+::ng-deep {
+    .custom-class {
+        .popup-window {
+            .heading {
+                color: red !important;
+                font-family: cursive;
+            }
+        }
+    }
 }
 ```
 

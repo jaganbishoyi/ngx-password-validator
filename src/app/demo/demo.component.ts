@@ -1,6 +1,7 @@
+import { NgPasswordValidatorOptions } from "./../../../projects/ng-password-validator/src/lib/ng-password-validator.interface";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { NgPasswordValidatorOptions } from "ng-password-validator";
+// import { NgPasswordValidatorOptions } from "ng-password-validator";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -54,7 +55,7 @@ export class DemoComponent implements OnInit {
             theme: ["pro"],
             placement: ["bottom"],
             shadow: [true],
-            "custom-class": ["jagan"],
+            "custom-class": ["custom-class"],
             "z-index": [""],
             "animation-duration": [""],
             offset: ["10"],
