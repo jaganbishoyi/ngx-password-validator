@@ -6,7 +6,8 @@
 </div>
 
 <div class="content" role="main">
-  <input type="text" id="password" name="password" placeholder="Password.." NgPasswordValidator placement="top">
+  <input type="text" id="password" name="password" placeholder="Password.." [NgPasswordValidator]="options">
+  <!-- <input type="text" id="password" name="password" placeholder="Password.." NgPasswordValidator> -->
 </div>
 
 <router-outlet></router-outlet>
