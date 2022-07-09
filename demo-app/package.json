@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
-    "ng-password-validator": "^2.0.0",
+    "ng-password-validator": "~3.0.0",
     "bootstrap": "^4.5.3",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.5.4",

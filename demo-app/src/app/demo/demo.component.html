@@ -1,15 +1,8 @@
 <div class="demo">
   <div class="content" role="main">
     <label for="password">Password</label>
-    <input
-      type="text"
-      id="password"
-      name="password"
-      placeholder="Password.."
-      [NgPasswordValidator]="options"
-      (valid)="isValid($event)"
-      (keyup)="onInput($event)"
-    />
+    <input type="text" id="password" name="password" placeholder="Password.." [NgPasswordValidator]="options"
+      (valid)="isValid($event)" (keyup)="onInput($event)" />
   </div>
   <form [formGroup]="form">
     <div class="row">
@@ -23,24 +16,12 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="theme"
-                value="pro"
-                formControlName="theme"
-              />Pro
+              <input type="radio" class="form-check-input" name="theme" value="pro" formControlName="theme" />Pro
             </label>
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="theme"
-                value="basic"
-                formControlName="theme"
-              />Basic
+              <input type="radio" class="form-check-input" name="theme" value="basic" formControlName="theme" />Basic
             </label>
           </div>
         </div>
@@ -53,46 +34,26 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="placement"
-                value="top"
-                formControlName="placement"
-              />Top
+              <input type="radio" class="form-check-input" name="placement" value="top"
+                formControlName="placement" />Top
             </label>
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="placement"
-                value="right"
-                formControlName="placement"
-              />Right
+              <input type="radio" class="form-check-input" name="placement" value="right"
+                formControlName="placement" />Right
             </label>
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="placement"
-                value="bottom"
-                formControlName="placement"
-              />Bottom
+              <input type="radio" class="form-check-input" name="placement" value="bottom"
+                formControlName="placement" />Bottom
             </label>
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="placement"
-                value="left"
-                formControlName="placement"
-              />Left
+              <input type="radio" class="form-check-input" name="placement" value="left"
+                formControlName="placement" />Left
             </label>
           </div>
         </div>
@@ -105,24 +66,13 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="shadow"
-                [value]="true"
-                formControlName="shadow"
-              />True
+              <input type="radio" class="form-check-input" name="shadow" [value]="true" formControlName="shadow" />True
             </label>
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="radio"
-                class="form-check-input"
-                name="shadow"
-                [value]="false"
-                formControlName="shadow"
-              />False
+              <input type="radio" class="form-check-input" name="shadow" [value]="false"
+                formControlName="shadow" />False
             </label>
           </div>
         </div>
@@ -135,13 +85,8 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                name="custom-class"
-                formControlName="custom-class"
-                placeholder="custom class.."
-              />
+              <input type="text" class="form-check-input" name="custom-class" formControlName="custom-class"
+                placeholder="custom class.." />
             </label>
           </div>
         </div>
@@ -154,13 +99,8 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                name="z-index"
-                formControlName="z-index"
-                placeholder="z-index"
-              />
+              <input type="text" class="form-check-input" name="z-index" formControlName="z-index"
+                placeholder="z-index" />
             </label>
           </div>
         </div>
@@ -173,13 +113,8 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                name="animation-duration"
-                formControlName="animation-duration"
-                placeholder="3500 .."
-              />
+              <input type="text" class="form-check-input" name="animation-duration" formControlName="animation-duration"
+                placeholder="3500 .." />
             </label>
           </div>
         </div>
@@ -192,13 +127,7 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                name="offset"
-                formControlName="offset"
-                placeholder="15 .."
-              />
+              <input type="text" class="form-check-input" name="offset" formControlName="offset" placeholder="15 .." />
             </label>
           </div>
         </div>
@@ -211,13 +140,7 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                name="width"
-                formControlName="width"
-                placeholder="350 .."
-              />
+              <input type="text" class="form-check-input" name="width" formControlName="width" placeholder="350 .." />
             </label>
           </div>
         </div>
@@ -230,13 +153,8 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                name="max-width"
-                formControlName="max-width"
-                placeholder="400 .."
-              />
+              <input type="text" class="form-check-input" name="max-width" formControlName="max-width"
+                placeholder="400 .." />
             </label>
           </div>
         </div>
@@ -249,26 +167,14 @@
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                style="width: 70px"
-                name="top"
-                formControlName="top"
-                placeholder="top"
-              />
+              <input type="text" class="form-check-input" style="width: 70px" name="top" formControlName="top"
+                placeholder="top" />
             </label>
           </div>
           <div class="form-check-inline">
             <label class="form-check-label">
-              <input
-                type="text"
-                class="form-check-input"
-                style="width: 70px"
-                name="left"
-                formControlName="left"
-                placeholder="left"
-              />
+              <input type="text" class="form-check-input" style="width: 70px" name="left" formControlName="left"
+                placeholder="left" />
             </label>
           </div>
         </div>
@@ -278,57 +184,32 @@
         <h6>Rules</h6>
         <div class="form-check">
           <label class="form-check-label" for="check1">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="check1"
-              name="include-symbol"
-              formControlName="include-symbol"
-            />Include symbol
+            <input type="checkbox" class="form-check-input" id="check1" name="include-symbol"
+              formControlName="include-symbol" />Include symbol
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label" for="check2">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="check2"
-              name="include-number"
-              formControlName="include-number"
-            />Include number
+            <input type="checkbox" class="form-check-input" id="check2" name="include-number"
+              formControlName="include-number" />Include number
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label" for="check3">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="check3"
-              name="include-lowercase-characters"
-              formControlName="include-lowercase-characters"
-            />Include lowercase characters
+            <input type="checkbox" class="form-check-input" id="check3" name="include-lowercase-characters"
+              formControlName="include-lowercase-characters" />Include lowercase characters
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label" for="check4">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="check4"
-              name="include-uppercase-characters"
-              formControlName="include-uppercase-characters"
-            />Include uppercase characters
+            <input type="checkbox" class="form-check-input" id="check4" name="include-uppercase-characters"
+              formControlName="include-uppercase-characters" />Include uppercase characters
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label" for="check5">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="check5"
-              name="password"
-              formControlName="password"
-            />Password
+            <input type="checkbox" class="form-check-input" id="check5" name="password"
+              formControlName="password" />Password
           </label>
         </div>
 
@@ -341,24 +222,31 @@
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  name="type"
-                  value="number"
-                  formControlName="type"
-                />Number
+                <input type="radio" class="form-check-input" name="passwordType" value="number"
+                  formControlName="passwordType" />Number
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  name="type"
-                  value="range"
-                  formControlName="type"
-                />Range
+                <input type="radio" class="form-check-input" name="passwordType" value="range"
+                  formControlName="passwordType" />Range
+              </label>
+            </div>
+          </div>
+          <div class="Type mt-2">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <h6 class="label">Template :</h6>
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="type" value="inline" formControlName="type" />inline
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="type" value="popup" formControlName="type" />popup
               </label>
             </div>
           </div>
@@ -370,13 +258,7 @@
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input
-                  type="text"
-                  class="form-check-input"
-                  name="length"
-                  formControlName="length"
-                  placeholder="8 .."
-                />
+                <input type="text" class="form-check-input" name="length" formControlName="length" placeholder="8 .." />
               </label>
             </div>
           </div>
@@ -388,13 +270,7 @@
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input
-                  type="text"
-                  class="form-check-input"
-                  name="min"
-                  formControlName="min"
-                  placeholder="6 .."
-                />
+                <input type="text" class="form-check-input" name="min" formControlName="min" placeholder="6 .." />
               </label>
             </div>
           </div>
@@ -406,13 +282,7 @@
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input
-                  type="text"
-                  class="form-check-input"
-                  name="max"
-                  formControlName="max"
-                  placeholder="10 .."
-                />
+                <input type="text" class="form-check-input" name="max" formControlName="max" placeholder="10 .." />
               </label>
             </div>
           </div>
@@ -424,13 +294,8 @@
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input
-                  type="text"
-                  class="form-check-input w-100"
-                  name="heading"
-                  formControlName="heading"
-                  placeholder="Heading .."
-                />
+                <input type="text" class="form-check-input w-100" name="heading" formControlName="heading"
+                  placeholder="Heading .." />
               </label>
             </div>
           </div>
@@ -442,13 +307,8 @@
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input
-                  type="text"
-                  class="form-check-input w-100"
-                  name="successMessage"
-                  formControlName="successMessage"
-                  placeholder="Success Message .."
-                />
+                <input type="text" class="form-check-input w-100" name="successMessage" formControlName="successMessage"
+                  placeholder="Success Message .." />
               </label>
             </div>
           </div>

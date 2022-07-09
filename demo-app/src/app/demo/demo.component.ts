@@ -17,12 +17,13 @@ export class DemoComponent implements OnInit {
     'animation-duration': 500,
   };
 
-  defaultOptions = {
+  defaultOptions: NgPasswordValidatorOptions = {
     placement: 'bottom',
     'z-index': 0,
     'custom-class': 'custom-class',
     shadow: true,
     theme: 'pro',
+    type: 'inline',
     offset: 8,
     heading: 'Password Policy',
     successMessage: 'Awesome! Password requirement fulfilled.',
@@ -67,7 +68,8 @@ export class DemoComponent implements OnInit {
       'include-lowercase-characters': [true],
       'include-symbol': [true],
       'include-number': [true],
-      type: ['range'],
+      passwordType: ['range'],
+      type: ['popup'],
       length: [''],
       min: ['6'],
       max: ['10'],
@@ -92,7 +94,7 @@ export class DemoComponent implements OnInit {
         'include-number': value['include-number'],
         password: value.password
           ? {
-              type: value.type,
+              type: value.passwordType,
               length: value.length,
               min: value.min,
               max: value.max,
@@ -103,7 +105,11 @@ export class DemoComponent implements OnInit {
       this.updateOptions({ ...value });
     });
 
-    this.form.get('type').valueChanges.subscribe((type: string) => {
+    this.form.get('type').valueChanges.subscribe((type: 'inline' | 'popup') => {
+      this.options['type'] = type;
+    });
+
+    this.form.get('passwordType').valueChanges.subscribe((type: string) => {
       switch (type) {
         case 'range':
           this.form.patchValue({
@@ -137,6 +143,7 @@ export class DemoComponent implements OnInit {
   }
 
   updateOptions(value: any): void {
+    debugger;
     delete value.top;
     delete value.left;
     delete value['include-uppercase-characters'];
@@ -144,7 +151,8 @@ export class DemoComponent implements OnInit {
     delete value['include-symbol'];
     delete value['include-number'];
     delete value.password;
-    delete value.type;
+    delete value.passwordType;
+    delete value.template;
     delete value.length;
     delete value.min;
     delete value.max;
