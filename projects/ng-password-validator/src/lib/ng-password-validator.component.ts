@@ -134,6 +134,7 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
     this.setStyles();
     this.setTheme();
     this.setCustomText();
+
     this.dataService.updatedValue.subscribe((data: IStatus) => {
       this.passwordStatus = { ...this.passwordStatus, ...data };
       for (const propName in this.passwordOptions.rules) {
@@ -323,8 +324,9 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
   setStyles(): void {
     this.setZIndex();
     this.setAnimationDuration();
-
-    this.hostClassShadow = this.options['shadow'];
+    if (this.options.type !== 'inline') {
+      this.hostClassShadow = this.options['shadow'];
+    }
     this.hostStyleMaxWidth = this.options['max-width'] + 'px';
     this.hostStyleWidth = this.options['width']
       ? this.options['width'] + 'px'

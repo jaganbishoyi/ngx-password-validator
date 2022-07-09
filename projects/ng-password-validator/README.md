@@ -1,4 +1,5 @@
 # Password validator for Angular
+
 [![npm](https://img.shields.io/npm/v/ng-password-validator.svg?style=flat-square)](https://www.npmjs.com/package/ng-password-validator)
 [![GitHub Contributors](https://img.shields.io/github/contributors/jaganbishoyi/ngx-password-validator.svg?style=flat-square)](https://github.com/jaganbishoyi/ngx-password-validator/graphs/contributors)
 ![GitHub language count](https://img.shields.io/github/languages/count/jaganbishoyi/ngx-password-validator)
@@ -14,6 +15,7 @@ The password validator is a pop-up window that appears when you start typing in 
 Help to make Password Validator better by [answering a few questions](https://forms.gle/P5KKhEsr91N85oWE9).
 
 ## Demo
+
 [https://jaganbishoyi.github.io/ngx-password-validator/](https://jaganbishoyi.github.io/ngx-password-validator/)
 
 ## Installation
@@ -38,7 +40,7 @@ Options can be set in the directive tag, so they have the highest priority.
 
 ```html
 <input type="text" id="password" name="password" placeholder="Password.."
-    NgPasswordValidator placement="top">
+    NgPasswordValidator>
 ```
 
 You may pass as an object:
@@ -47,7 +49,9 @@ You may pass as an object:
 <input type="text" id="password" name="password" placeholder="Password.."
     [NgPasswordValidator]="options">
 ```
+
 Password type as 'range':
+
 ```ts
 options = {
     'placement': 'top',
@@ -63,7 +67,9 @@ options = {
     'offset': 15,
 }
 ```
+
 Password type as 'number':
+
 ```ts
 options = {
     'placement': 'top',
@@ -79,20 +85,49 @@ options = {
 }
 ```
 
+Template( Default value is popup ):
+
+```html
+<input type="text" id="password" name="password" placeholder="Password.."
+    [NgPasswordValidator]="options">
+```
+
+Template as 'inline':
+
+```ts
+options = {
+    'template': 'inline',
+    'theme': 'pro'
+}
+```
+
+Template as 'popup':
+
+```ts
+options = {
+    'template': 'popup',
+    'theme': 'pro'
+}
+```
+
 Theming( Default value is pro ):
 
 ```html
 <input type="text" id="password" name="password" placeholder="Password.."
     [NgPasswordValidator]="options">
 ```
+
 Theme as 'basic':
+
 ```ts
 options = {
     'placement': 'top',
     'theme': 'basic'
 }
 ```
+
 Theme as 'pro':
+
 ```ts
 options = {
     'placement': 'top',
@@ -106,6 +141,7 @@ You can also change Popup header and success message:
 <input type="text" id="password" name="password" placeholder="Password.."
     [NgPasswordValidator]="options">
 ```
+
 ```ts
 options = {
     'heading': 'Password Requirement',
@@ -117,27 +153,34 @@ After closing the popup window, you will get one output for password validity (t
 
 ```html
 <input type="text" id="password" name="password" placeholder="Password.."
-    NgPasswordValidator placement="top" (valid)="isValid($event)">
+    NgPasswordValidator (valid)="isValid($event)">
 ```
+
 ```ts
 isValid(event: boolean) {
     this.isPasswordValid = event;
 }
 ```
 
-## Custom class configuration:
+## Custom class configuration
+
 In Component HTML file
+
 ```html
 <input type="text" id="password" name="password" placeholder="Password.."
     [NgPasswordValidator]="options">
 ```
+
 In Component TS file
+
 ```ts
 options = {
     'custom-class': 'custom-class',
 }
 ```
+
 In Component SCSS file
+
 ```CSS
 ::ng-deep {
     .custom-class {
@@ -154,6 +197,7 @@ In Component SCSS file
 ## Set default values
 
 In app.module.ts export the default options like below:
+
 ```ts
 import { NgPasswordValidatorModule, NgPasswordValidatorOptions } from "ng-password-validator";
 
@@ -174,6 +218,7 @@ export const MyDefaultOptions: NgPasswordValidatorOptions = {
 ```
 
 And pass your parameters when importing the module:
+
 ```ts
 @NgModule({
     imports: [
@@ -182,12 +227,12 @@ And pass your parameters when importing the module:
 })
 ```
 
-
 ## Properties
 
 | name               | type                             | default                                  | description                                                                     |
 | ------------------ | -------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------- |
 | placement          | "top", "bottom", "left", "right" | "bottom"                                 | The position of the popup window.                                               |
+| template           | "inline", "popup"                | "popup"                                  | Password template                                                               |
 | z-index            | number                           | 0                                        | Z-index of the popup window.                                                    |
 | trigger            | "focus"                          |                                          | Specifies how the popup window is triggered.                                    |
 | custom-class       | string                           |                                          | Classes to be passed to the popup window.                                       |
@@ -202,7 +247,6 @@ And pass your parameters when importing the module:
 | pointerEvents      | "auto", "none"                   | "none"                                   | Defines whether or not an element reacts to pointer events.                     |
 | position           | {top: number, left: number}      | undefined                                | The popup window coordinates relative to the browser window.                    |
 
-
 ## Events
 
 When you call events, the delays that are specified in the options in the directive are taken into account.
@@ -213,7 +257,6 @@ When you call events, the delays that are specified in the options in the direct
 | {type: "shown", position: DOMRect}  | The event is called after the animation of the appearance of the popup window. |
 | {type: "hide", position: DOMRect}   | The event is called before the popup window is hidden.                         |
 | {type: "hidden", position: DOMRect} | The event is called after the animation of the popup window is hidden.         |
-
 
 ## For any questions, suggestions, or feature requests
 
