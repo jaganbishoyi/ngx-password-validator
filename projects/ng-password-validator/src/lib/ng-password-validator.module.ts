@@ -5,11 +5,12 @@ import { NgPasswordValidatorComponent } from './ng-password-validator.component'
 import { NgPasswordValidatorDirective } from './ng-password-validator.directive';
 import { NgPasswordValidatorOptions } from './ng-password-validator.interface';
 import { NgPasswordValidatorService } from './ng-password-validator.service';
+import { UtilsService } from './utils.service';
 
 @NgModule({
   declarations: [NgPasswordValidatorDirective, NgPasswordValidatorComponent],
   imports: [CommonModule],
-  providers: [DataService],
+  providers: [DataService, UtilsService],
   exports: [NgPasswordValidatorDirective],
   entryComponents: [NgPasswordValidatorComponent],
 })

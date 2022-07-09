@@ -5,6 +5,7 @@ export interface NgPasswordValidatorOptions {
   'custom-class'?: string;
   shadow?: boolean;
   theme?: 'basic' | 'pro';
+  type?: 'inline' | 'popup';
   offset?: number;
   width?: number;
   'max-width'?: number;
@@ -47,4 +48,10 @@ export interface IStatus {
   'include-number': boolean;
   'include-lowercase-characters': boolean;
   'include-uppercase-characters': boolean;
+}
+export interface HostComponent {
+  data: any;
+  show: boolean;
+  close: boolean;
+  events: any;
 }

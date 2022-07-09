@@ -9,6 +9,7 @@ export const defaultOptions: NgPasswordValidatorOptions = {
   'custom-class': '',
   shadow: true,
   theme: 'pro',
+  type: 'popup',
   offset: 8,
   heading: 'Password Policy',
   successMessage: 'Awesome! Password requirement fulfilled.',

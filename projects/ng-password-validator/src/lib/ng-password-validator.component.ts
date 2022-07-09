@@ -324,8 +324,9 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
   setStyles(): void {
     this.setZIndex();
     this.setAnimationDuration();
-
-    this.hostClassShadow = this.options['shadow'];
+    if (this.options.type !== 'inline') {
+      this.hostClassShadow = this.options['shadow'];
+    }
     this.hostStyleMaxWidth = this.options['max-width'] + 'px';
     this.hostStyleWidth = this.options['width']
       ? this.options['width'] + 'px'

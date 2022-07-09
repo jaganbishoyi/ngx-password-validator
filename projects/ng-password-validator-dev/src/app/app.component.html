@@ -6,7 +6,12 @@
 </div>
 
 <div class="content" role="main">
-  <input type="text" id="password" name="password" placeholder="Password.." [NgPasswordValidator]="options">
+  <input type="text" id="password" name="password" placeholder="Password.." [NgPasswordValidator]="options"
+    (valid)="isValid($event)">
+  <input type="text" name="password" placeholder="Password..">
+  <input type="text" name="password" placeholder="Password..">
+  <input type="text" name="password" placeholder="Password..">
+  <input type="text" name="password" placeholder="Password..">
   <!-- <input type="text" id="password" name="password" placeholder="Password.." NgPasswordValidator> -->
 </div>
 

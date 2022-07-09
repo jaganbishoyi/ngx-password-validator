@@ -52,7 +52,7 @@ p {
 
 .content {
   display: flex;
-  margin: 82px auto 32px;
+  margin: 150px auto 32px;
   padding: 0 16px;
   max-width: 960px;
   flex-direction: column;
@@ -60,7 +60,6 @@ p {
 
   input {
     width: 400px;
-    margin-top: 60px;
     font-size: max(16px, 1em);
     font-family: inherit;
     padding: 0.25em 0.5em;
@@ -68,5 +67,19 @@ p {
     border: 2px solid #eeeeee;
     border-radius: 4px;
     height: 28px;
+    margin-bottom: 15px;
+  }
+}
+
+::ng-deep {
+  .custom-class {
+    .popup-window {
+      padding: 0;
+
+      .heading {
+        color: #9c0404;
+        font-family: inherit;
+      }
+    }
   }
 }

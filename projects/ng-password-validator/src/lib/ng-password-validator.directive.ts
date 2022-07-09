@@ -20,19 +20,14 @@ import { Subscription } from 'rxjs';
 import { DataService } from './data.service';
 import { NgPasswordValidatorComponent } from './ng-password-validator.component';
 import {
+  HostComponent,
   IElementPosition,
   IPosition,
   NgPasswordValidatorOptions,
 } from './ng-password-validator.interface';
 import { NgPasswordValidatorService } from './ng-password-validator.service';
 import { defaultOptions } from './options';
-
-export interface HostComponent {
-  data: any;
-  show: boolean;
-  close: boolean;
-  events: any;
-}
+import { UtilsService } from './utils.service';
 
 @Directive({
   selector: '[NgPasswordValidator]',
@@ -52,25 +47,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
   passwordOptions: NgPasswordValidatorOptions;
   componentSubscribe: Subscription;
 
-  @Input('options') set optionsInput(value: NgPasswordValidatorOptions) {
-    if (value && defaultOptions) {
-      this.passwordOptions = this.deepMerge(defaultOptions, value);
-      this.createPasswordRegex();
-    }
-  }
   @Input('NgPasswordValidator') popup: NgPasswordValidatorOptions;
-  @Input('placement') placement: string;
-  @Input('z-index') zIndex: number;
-  @Input('animation-duration') animationDuration: number;
-  @Input('custom-class') customClass: string;
-  @Input('shadow') shadow: boolean;
-  @Input('theme') theme: 'basic' | 'pro';
-  @Input('offset') offset: number;
-  @Input('width') width: number;
-  @Input('max-width') maxWidth: number;
-  @Input('position') position: IPosition;
-  @Input('heading') heading: string;
-  @Input('successMessage') successMessage: string;
 
   @Output() events: EventEmitter<any> = new EventEmitter<any>();
   @Output() valid: EventEmitter<boolean> = new EventEmitter();
@@ -81,6 +58,7 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
     private dataService: DataService,
+    private utilsService: UtilsService,
     private injector: Injector
   ) {}
 
@@ -92,13 +70,6 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     return this.componentRef && this.componentRef.hostView.destroyed;
   }
 
-  /**
-   * Get popup position
-   *
-   * @readonly
-   * @type {(IElementPosition | IPosition)}
-   * @memberof NgPasswordValidatorDirective
-   */
   get popupPosition(): IElementPosition | IPosition {
     if (this.options['position']) {
       return this.options['position'];
@@ -118,19 +89,6 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     this.show();
     this.checkPassword(value);
   }
-  /**
-   * Update password options
-   *
-   * @memberof NgPasswordValidatorDirective
-   */
-  updatePasswordOptions(): void {
-    if (this.popup && defaultOptions) {
-      this.passwordOptions = this.deepMerge(defaultOptions, this.popup);
-    } else {
-      this.passwordOptions = { ...defaultOptions };
-    }
-    this.createPasswordRegex();
-  }
 
   /**
    * Focus out of input field
@@ -139,7 +97,10 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
    */
   @HostListener('focusout')
   onMouseLeave(): void {
-    this.destroyPopup();
+    // If the template type is inline, don't destroy the created template
+    if (this.passwordOptions.type !== 'inline') {
+      this.destroyPopup();
+    }
     this.valid.emit(this.isValid);
   }
 
@@ -161,6 +122,12 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
    * @memberof NgPasswordValidatorDirective
    */
   ngOnChanges(changes: { popup: SimpleChange }): void {
+    // If the template type is 'inline' create the inline template directly
+    const templateType = changes.popup.currentValue.type;
+    if (templateType === 'inline') {
+      this.updatePasswordOptions();
+      this.show();
+    }
     const changedOptions = this.getProperties(changes);
     this.applyOptionsDefault(changedOptions, defaultOptions);
   }
@@ -175,31 +142,6 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     if (this.componentSubscribe) {
       this.componentSubscribe.unsubscribe();
     }
-  }
-
-  /**
-   * Deep merge objects
-   *
-   * @param {NgPasswordValidatorOptions} target
-   * @param {NgPasswordValidatorOptions} source
-   * @returns {NgPasswordValidatorOptions}
-   * @memberof NgPasswordValidatorDirective
-   */
-  deepMerge(
-    target: NgPasswordValidatorOptions,
-    source: NgPasswordValidatorOptions
-  ): NgPasswordValidatorOptions {
-    // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
-    for (const key of Object.keys(source)) {
-      if (source[key] instanceof Object) {
-        Object.assign(source[key], this.deepMerge(target[key], source[key]));
-      }
-    }
-
-    // Join `target` and modified `source`
-    Object.assign(target || {}, source);
-
-    return target;
   }
 
   /**
@@ -271,6 +213,23 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     }
     this.isValid = Object.values(data).every((value: boolean) => value);
     this.dataService.updateValue(data);
+  }
+
+  /**
+   * Update password options
+   *
+   * @memberof NgPasswordValidatorDirective
+   */
+  updatePasswordOptions(): void {
+    if (this.popup && defaultOptions) {
+      this.passwordOptions = this.utilsService.deepMerge(
+        defaultOptions,
+        this.popup
+      );
+    } else {
+      this.passwordOptions = { ...defaultOptions };
+    }
+    this.createPasswordRegex();
   }
 
   /**
@@ -400,6 +359,11 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
     ).events.subscribe((event: any) => {
       this.handleEvents(event);
     });
+
+    if (this.options.type === 'inline') {
+      this.elementRef.nativeElement.style.marginBottom =
+        this.popupPosition['bottom'] + 'px';
+    }
   }
 
   /**
