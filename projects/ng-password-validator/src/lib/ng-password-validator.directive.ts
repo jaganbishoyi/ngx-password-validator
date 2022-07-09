@@ -126,8 +126,10 @@ export class NgPasswordValidatorDirective implements OnDestroy, OnChanges {
   updatePasswordOptions(): void {
     if (this.popup && defaultOptions) {
       this.passwordOptions = this.deepMerge(defaultOptions, this.popup);
-      this.createPasswordRegex();
+    } else {
+      this.passwordOptions = { ...defaultOptions };
     }
+    this.createPasswordRegex();
   }
 
   /**

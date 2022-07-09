@@ -134,6 +134,7 @@ export class NgPasswordValidatorComponent implements OnInit, OnChanges {
     this.setStyles();
     this.setTheme();
     this.setCustomText();
+
     this.dataService.updatedValue.subscribe((data: IStatus) => {
       this.passwordStatus = { ...this.passwordStatus, ...data };
       for (const propName in this.passwordOptions.rules) {
